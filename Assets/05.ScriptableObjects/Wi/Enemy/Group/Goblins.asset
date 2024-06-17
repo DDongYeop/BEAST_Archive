@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2accd245ad2fb6447bdc4499dac230b1, type: 3}
+  m_Name: Goblins
+  m_EditorClassIdentifier: 
+  enemies:
+  - {fileID: 5014314692405340279, guid: 7f85cfe1588320047979fcf6598acd57, type: 3}
+  - {fileID: 95426892276017947, guid: c2ea9af7494c7f3479c1b39b7291eee3, type: 3}
+  - {fileID: 1709350771774866323, guid: 7701feec15e4e5d45a2a5f7474e3133c, type: 3}
+  - {fileID: 5095165959295154074, guid: 0ba0101829b981f49bc8a38a2b66c29a, type: 3}
