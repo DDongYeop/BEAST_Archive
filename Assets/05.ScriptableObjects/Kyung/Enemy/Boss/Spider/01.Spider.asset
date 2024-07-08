@@ -15,7 +15,7 @@ MonoBehaviour:
   State: 0
   Started: 0
   Guid: 3a77446ce6f621b4c8f7b823c8a4e601
-  Position: {x: 401, y: 267}
+  Position: {x: 403, y: 261}
   Blackboard:
     MoveToPosition: {x: 0, y: 0, z: 0}
     MoveToObject: {fileID: 0}
@@ -26,6 +26,7 @@ MonoBehaviour:
   - {fileID: -2710117463371208882}
   - {fileID: -722626025276823994}
   - {fileID: 6571136955588607010}
+  - {fileID: 737224830221927690}
 --- !u!114 &-4971817947327098441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,16 +153,16 @@ MonoBehaviour:
   State: 0
   Started: 0
   Guid: 417e5d2f1f06a5742be0310580d4aef1
-  Position: {x: 196.00005, y: 423.99997}
+  Position: {x: 154, y: 416}
   Blackboard:
     MoveToPosition: {x: 0, y: 0, z: 0}
     MoveToObject: {fileID: 0}
   Brain: {fileID: 0}
   Description: Attack01
-  _condition: 0
-  _benchmark: 0
-  _isDown: 0
-  _coolTime: 4
+  _condition: 3
+  _benchmark: 14
+  _isDown: 1
+  _coolTime: 3.5
   _animationKey: Attack01
   _isShake: 0
   _shakePower: 0
@@ -182,16 +183,16 @@ MonoBehaviour:
   State: 0
   Started: 0
   Guid: 2df1940822093254fb099c940d8cbdee
-  Position: {x: 396.99997, y: 423.99997}
+  Position: {x: 312, y: 416}
   Blackboard:
     MoveToPosition: {x: 0, y: 0, z: 0}
     MoveToObject: {fileID: 0}
   Brain: {fileID: 0}
   Description: Attack02
-  _condition: 0
-  _benchmark: 0
-  _isDown: 0
-  _coolTime: 7
+  _condition: 3
+  _benchmark: 17.5
+  _isDown: 1
+  _coolTime: 8
   _animationKey: Attack02
   _isShake: 0
   _shakePower: 0
@@ -221,9 +222,40 @@ MonoBehaviour:
   - {fileID: -2710117463371208882}
   - {fileID: -722626025276823994}
   - {fileID: 6571136955588607010}
+  - {fileID: 737224830221927690}
   Blackboard:
     MoveToPosition: {x: 0, y: 0, z: 0}
     MoveToObject: {fileID: 0}
+--- !u!114 &737224830221927690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a90cf035e6c20e847bc5a8945f4a6a75, type: 3}
+  m_Name: AnimationNode
+  m_EditorClassIdentifier: 
+  State: 0
+  Started: 0
+  Guid: 377bc6e06233c1e43a3c80586dd1b80e
+  Position: {x: 470.00003, y: 416.00003}
+  Blackboard:
+    MoveToPosition: {x: 0, y: 0, z: 0}
+    MoveToObject: {fileID: 0}
+  Brain: {fileID: 0}
+  Description: Attack03
+  _condition: 3
+  _benchmark: 12.5
+  _isDown: 1
+  _coolTime: 9
+  _animationKey: Attack03
+  _isShake: 0
+  _shakePower: 0
+  _shakeTime: 0
+  IsAttackStop: 0
 --- !u!114 &6571136955588607010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,7 +271,7 @@ MonoBehaviour:
   State: 0
   Started: 0
   Guid: c488835378dd90b4d9154ef6463baf10
-  Position: {x: 579.22546, y: 416}
+  Position: {x: 628, y: 415}
   Blackboard:
     MoveToPosition: {x: 0, y: 0, z: 0}
     MoveToObject: {fileID: 0}

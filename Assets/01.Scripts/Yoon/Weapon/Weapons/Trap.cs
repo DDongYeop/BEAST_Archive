@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Trap : ThrownWeapon
 {
-    private SturnComponent sturnComponent;
+    private SturnSkill sturnComponent;
 
     [SerializeField] private float rotateSpeed;
     [SerializeField] private float sturnTime = 2f;
@@ -22,7 +22,7 @@ public class Trap : ThrownWeapon
     protected override void Awake()
     {
         base.Awake();
-        sturnComponent = GetComponent<SturnComponent>();
+        sturnComponent = GetComponent<SturnSkill>();
     }
 
     public override void Init()

@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3984401926229216967
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3956503902342617835}
+  - component: {fileID: 6895059480539394391}
+  - component: {fileID: 1602151949026459611}
+  - component: {fileID: 6585832598140581416}
+  m_Layer: 0
+  m_Name: Managers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3956503902342617835
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3984401926229216967}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6895059480539394391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3984401926229216967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84a059c823c3d424aac5e44c0c5a879d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerTrm: {fileID: 0}
+  EnemyBrain: {fileID: 0}
+  _poolingList: {fileID: 11400000, guid: 8f636786fbe2dca42bd4486ebc7afab0, type: 2}
+  _weaponPoolingList: {fileID: 11400000, guid: c94d4bb0e5efcea448307430424e0b8d, type: 2}
+  IsGameOver: 0
+--- !u!114 &1602151949026459611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3984401926229216967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49e3f00b6a894ea45ac0a56aa51a852a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultWeaponInfos: []
+  defaultSkillInfos: []
+  defaultSkillInfo: {fileID: 0}
+  data:
+    weaponInfoList: []
+    skillInfoList: []
+    level:
+      Levels: 00000000000000000000
+    SkillInfo: {fileID: 0}
+--- !u!114 &6585832598140581416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3984401926229216967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb6f16aae33fc2488ed4c639243a369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentLevelValue: 1

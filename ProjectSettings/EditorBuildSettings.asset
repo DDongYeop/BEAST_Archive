@@ -12,15 +12,21 @@ EditorBuildSettings:
     path: Assets/00.Scenes/Ko/Menu 2.unity
     guid: 9f35d454b8943554eb1d84fed096afa3
   - enabled: 1
-    path: Assets/00.Scenes/Kyung/Boss/Bear/1.Bear.unity
+    path: Assets/00.Scenes/Kyung/Bear/1.Bear.unity
     guid: 554f2292fe7dc144597124c108b24cbc
   - enabled: 1
-    path: Assets/00.Scenes/Kyung/Boss/Bear/2.Bear.unity
+    path: Assets/00.Scenes/Kyung/Bear/2.Bear.unity
     guid: e9640a23f577dc147a9e67505c7de6a1
   - enabled: 1
-    path: Assets/00.Scenes/Kyung/Boss/Bear/3.Bear.unity
+    path: Assets/00.Scenes/Kyung/Bear/3.Bear.unity
     guid: 0bcc3f52d57448047a8a3531726edc86
   - enabled: 1
-    path: Assets/00.Scenes/Kyung/Boss/Spider/1.Spider.unity
+    path: Assets/00.Scenes/Kyung/Spider/1.Spider.unity
     guid: be400d417b6f3f747b7aacf6a9f51ba9
+  - enabled: 1
+    path: Assets/00.Scenes/Kyung/Spider/2.Spider.unity
+    guid: a1474924ea400eb40816f78c2d0215b8
+  - enabled: 1
+    path: Assets/00.Scenes/Kyung/Spider/3.Spider.unity
+    guid: d783c6c83edf65c4ba76570d8328e9e7
   m_configObjects: {}

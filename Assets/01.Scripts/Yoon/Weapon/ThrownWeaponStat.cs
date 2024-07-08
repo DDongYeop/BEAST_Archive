@@ -16,9 +16,18 @@ public class ThrownWeaponStat : ScriptableObject
     [SerializeField] private int damage;
     public int Damage => damage;
 
-    // 한 번의 공격 중 발사 횟수
-    [SerializeField] private int throwCount = 1;
-    public int ThrowCount => throwCount;
+    // 최대 발사 횟수
+    [SerializeField] private int maxThrowCount = 0;
+    public int MaxThrowCount => maxThrowCount;
+    public int CurrentThrowCount { get; set; } = 0;
+
+    public bool IsOverThrow
+    {
+        get
+        {
+            return MaxThrowCount != 0 && MaxThrowCount <= CurrentThrowCount;
+        }
+    }
 
     // 발사체 무게
     [SerializeField] private float weaponMass = 2.0f;

@@ -1,12 +1,15 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class Scene_LevelSelect : UI_Scene
 {
+    [SerializeField] private Transform _content;
+    [SerializeField] private GameObject _stageObj;
     [SerializeField] private float _snapForce;
     [SerializeField] private Vector2 _slotSize;
 
@@ -42,7 +45,39 @@ public class Scene_LevelSelect : UI_Scene
         BindEvent(Get<ScrollRect>("Scroll View").gameObject, (PointerEventData _data, Transform _transform) => { _isMouseDown = true; }, Define.ClickType.Down);
         BindEvent(Get<ScrollRect>("Scroll View").gameObject, (PointerEventData _data, Transform _transform) => { _isMouseDown = false; }, Define.ClickType.Up);
 
+        BindEvent(Get<Image>("Image_CloseStage").gameObject, (PointerEventData _data, Transform _transform) => 
+        {
+            UIManager_Menu.Instance.HideScene("Image_Stages"); 
+            UIManager_Menu.Instance.ShowScene("Panel_Menu"); 
+        });
         //BindSlot();
+    }
+
+    public void BindSlot(StageSO _data)
+    {
+        var _sceneNames = _data.GetSceneNames();
+
+        foreach(Transform child in _content)
+        {
+            Destroy(child.gameObject);
+        }
+
+
+        foreach(var _scene in _sceneNames)
+        {
+            GameObject _newScene = Instantiate(_stageObj, _content);
+            
+
+            if(_newScene.TryGetComponent(out RectTransform _rect))
+            {
+                _rect.sizeDelta = _slotSize;
+            }
+
+            if(_newScene.TryGetComponent(out Button_Level _button))
+            {
+                _button.InitScene(_scene);
+            }
+        }
     }
 
     private void OnScrollMove(Vector2 _vec)

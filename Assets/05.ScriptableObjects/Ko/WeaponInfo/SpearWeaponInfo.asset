@@ -16,3 +16,5 @@ MonoBehaviour:
   weaponName: "\uCC3D"
   weaponSprite: {fileID: 21300000, guid: 63e2a5d7405f8e24bb6b89668efee9df, type: 3}
   spritePivotPosition: {x: 0, y: 0}
+  weaponDescription: "\uAC00\uC7A5 \uC815\uD655\uD558\uACE0, \uC798 \uAF42\uD788\uB294
+    \uBB34\uAE30\uC785\uB2C8\uB2E4."

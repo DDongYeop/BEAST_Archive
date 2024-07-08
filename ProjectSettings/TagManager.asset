@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Weapon
   - FloorCheck
+  - BossAttack
   layers:
   - Default
   - TransparentFX
@@ -24,7 +25,7 @@ TagManager:
   - Item
   - Garbage
   - TechTree
-  - 
+  - BossAttack
   - 
   - 
   - 

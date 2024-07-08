@@ -26,20 +26,22 @@ public class EnemyCollision : MonoBehaviour, IDamageable
                 other.transform.parent.GetComponent<IDamageable>().OnDamage(1, transform.position);
                 GameManager.Instance.GameOver();
             }
-            return;
+            return; 
         }
-        
+
         if (!other.transform.TryGetComponent(out ThrownWeapon weapon) || !weapon.IsFlying || _brain.IsDie)
             return;
+        
         weapon.IsFlying = false;
         
         if (_partType == EnemyPartType.ATTACK)
         {
             weapon.ObjectFall();
+            NotAttack(other.ClosestPoint(transform.position));
             return;
         }
 
-        if (weapon.Skill != null) // 보물 확인
+        if (weapon.Skill != null && weapon.SkillData.RunImmediately == false) // 스킬 확인
             weapon.UseSkill(transform.root.gameObject);
         
         PoolManager.Instance.Pop("Bear_Hit");
@@ -56,11 +58,19 @@ public class EnemyCollision : MonoBehaviour, IDamageable
 
     public void OnDamage(int damage, Vector3 hitPos = new Vector3())
     {
-        _agentHealth.OnDamage(damage, hitPos);
+        _agentHealth.OnDamage(damage * GameManager.Instance.ComboCount, hitPos);
         Taptic.Light();
         Transform hitParticle = PoolManager.Instance.Pop("HitEffect").transform;
         hitParticle.position = hitPos;
         Transform furParticle = PoolManager.Instance.Pop("FurEffect").transform;
         furParticle.position = hitPos;
+
+        GameManager.Instance.ComboIncrease();
+    }
+
+    public void NotAttack(Vector3 hitPos = new Vector3())
+    {
+        Transform shineParticle = PoolManager.Instance.Pop("ShineEffect").transform;
+        shineParticle.position = hitPos;
     }
 }

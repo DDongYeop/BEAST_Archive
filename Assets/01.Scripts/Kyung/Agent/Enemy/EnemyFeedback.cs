@@ -7,6 +7,7 @@ public class EnemyFeedback : MonoBehaviour
     [SerializeField] private List<TrailRenderer> _trails = new List<TrailRenderer>();
 
     [SerializeField] private List<Vector2> _dustEffectPos;
+    [SerializeField] private Vector3 _spiderWebPos;
 
     private void Start()
     {
@@ -18,7 +19,7 @@ public class EnemyFeedback : MonoBehaviour
         PoolManager.Instance.Pop(str);
     }
 
-    #region AnimationEvent
+#region AnimationEvent
 
     public void ShowAttackTrailTrue()
     {
@@ -39,9 +40,23 @@ public class EnemyFeedback : MonoBehaviour
 
     public void DustEffect(int num)
     {
-        Transform trm = PoolManager.Instance.Pop($"DustEffect{_currentBoss}").transform;
+        Transform trm;
+
+        if (num < 0)
+            trm = PoolManager.Instance.Pop($"DustEffect{_currentBoss}Weak").transform;
+        else 
+            trm = PoolManager.Instance.Pop($"DustEffect{_currentBoss}").transform;
+        
         trm.SetParent(transform);
-        trm.localPosition = _dustEffectPos[num];
+        trm.localPosition = _dustEffectPos[Mathf.Abs(num)];
+    }
+
+    public void SpiderWeb(float x)
+    {
+        print(x);
+        global::SpiderWeb web = PoolManager.Instance.Pop("SpiderWeb") as SpiderWeb;
+        web.transform.position = transform.position + _spiderWebPos;
+        web.TargetPos = GameManager.Instance.PlayerTrm.position + new Vector3(x, 0);
     }
 
 #endregion

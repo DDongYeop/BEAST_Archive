@@ -13,9 +13,10 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private int countOfPoints;
     [SerializeField] private float timeIntervalInPoints = 0.01f;
 
-    [Header("Display")]
+    [Header("DisplayAndEffect")]
     [SerializeField] private DisplayThrownWeapon mainDisplay;
-    [SerializeField] private DisplayThrownWeapon subDisplay; 
+    [SerializeField] private DisplayThrownWeapon subDisplay;
+    [SerializeField] private ParticleSystem skillNotifyEffect;
 
     // Component
     private WeaponController weaponController;
@@ -29,7 +30,7 @@ public class PlayerAttack : MonoBehaviour
     private ThrowInfo throwInfo;
 
     // 추후 get; private set;
-    public TreasureData equipTreasureData; // 현재 장착 중인 보물 정보
+    public SkillData equipTreasureData; // 현재 장착 중인 보물 정보
     private int throwCount;
     public int ThrowCount => throwCount;
 
@@ -57,6 +58,12 @@ public class PlayerAttack : MonoBehaviour
     {
         weaponController.OnWeaponStatChanged -= AcceptChangeWeaponStat;
         weaponController.OnTresureDataChanged -= AcceptChangeTreasureData;
+    }
+
+    private void Start()
+    {
+        //Scene_InGame _UI = UIManager_InGame.Instance.GetScene("Scene_InGame") as Scene_InGame;
+        //_UI.OnThrow(throwCount, equipTreasureData.CountForRecharge);
     }
 
     #region Aiming
@@ -114,14 +121,17 @@ public class PlayerAttack : MonoBehaviour
     {
         #region Treasure Func
 
-        TreasureData tresureData = null;
+        SkillData skillData = null;
 
-        // 보물 효과 발동 가능한지 확인하고, 발사횟수를 조정해 줍니다.
-        // 보물 효과가 발동할 시점이라면 데이터를 할당해 줍니다.
+        // 무기 스킬 발동 가능한지 확인하고, 발사횟수를 조정해 줍니다.
+        // 무기 스킬이 발동할 시점이라면 스킬 데이터를 할당해 줍니다.
         if (throwCount >= equipTreasureData.CountForRecharge)
         {
             throwCount = 0;
-            tresureData = equipTreasureData;
+            skillData = equipTreasureData;
+            skillData.CurrentWeaponId = equipWeaponStat.WeaponId;
+            skillNotifyEffect.Stop();
+            Debug.Log("EffectStop");
         }
         else
         {
@@ -129,22 +139,42 @@ public class PlayerAttack : MonoBehaviour
         }
 
         #endregion
-
-        // UI 업데이트
-        Scene_InGame _UI = UIManager_InGame.Instance.GetScene("Scene_InGame") as Scene_InGame;
-        _UI.OnThrow(throwCount, equipTreasureData.CountForRecharge);
         
         // 무기 생성 후 발사
         ThrownWeapon thrownWeapon = PoolManager.Instance.Pop(equipWeaponStat.WeaponId) as ThrownWeapon;
         thrownWeapon.transform.parent = null;
         thrownWeapon.transform.position = throwTransform.position;
-        thrownWeapon.ThrowThisWeapon(throwInfo.force, tresureData);
+        thrownWeapon.ThrowThisWeapon(throwInfo.force, skillData);
+
+        // UI 업데이트
+        #region UI Update
+
+        Scene_InGame _UI = UIManager_InGame.Instance.GetScene("Scene_InGame") as Scene_InGame;
+        _UI.OnThrow(throwCount, equipTreasureData.CountForRecharge);
+        if (equipWeaponStat.MaxThrowCount != 0)
+        {
+            _UI.OnUtillWeaponThrowed(equipWeaponStat.CurrentThrowCount, equipWeaponStat.MaxThrowCount);
+            if (equipWeaponStat.IsOverThrow)
+            {
+                _UI.SetChain(true);
+                StartCoroutine(_UI.ItemPopup(null, "무기 소진"));
+            }
+        }
+
+        #endregion
 
         // 0.4초 뒤 무기 이미지 켜주기
         StartCoroutine(OnDisplayAfterDelay(0.5f));
 
         // 사운드
         PoolManager.Instance.Pop("ThrowSound");
+
+        // 다음에 던졌을 때 스킬이 발동된다면 이펙트를 켜준다.
+        if (throwCount >= equipTreasureData.CountForRecharge)
+        {
+            Debug.Log("Effect on");
+            skillNotifyEffect.Play();
+        }
     }
 
     private IEnumerator OnDisplayAfterDelay(float deleyTime = 0f)
@@ -171,7 +201,7 @@ public class PlayerAttack : MonoBehaviour
     }
 
     // 보물 장착
-    private void AcceptChangeTreasureData(TreasureData treasureData)
+    private void AcceptChangeTreasureData(SkillData treasureData)
     {
         if (equipTreasureData == treasureData)
         {
@@ -179,5 +209,8 @@ public class PlayerAttack : MonoBehaviour
         }
 
         equipTreasureData = treasureData;
+
+        Scene_InGame _UI = UIManager_InGame.Instance.GetScene("Scene_InGame") as Scene_InGame;
+        _UI.OnThrow(throwCount, equipTreasureData.CountForRecharge);
     }
 }

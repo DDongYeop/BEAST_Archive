@@ -66,6 +66,15 @@ public abstract class UI_Base : MonoBehaviour
             case Define.ClickType.Move:
                 handle.OnMoveHandler = evt;
                 break;
+            //case Define.ClickType.OnDrag:
+            //    handle.OnBeginDragHandler = evt;
+            //    break;
+            //case Define.ClickType.Dragging:
+            //    handle.OnDragHandler = evt;
+            //    break;
+            //case Define.ClickType.EndDrag:
+            //    handle.OnEndDragHandler = evt;
+            //    break;
         }
     }
 }

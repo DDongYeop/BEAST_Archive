@@ -7,11 +7,17 @@ using UnityEngine;
 public class SaveData
 {
 	public List<ThrownWeaponInfo> weaponInfoList = new List<ThrownWeaponInfo>();
+	public List<SkillInfo> skillInfoList = new List<SkillInfo>();
+	public Level level;
+	public SkillInfo SkillInfo;
 }
 
 public class SaveLoadManager : MonoSingleton<SaveLoadManager>
 {
-	private List<IDataObserver> observers;
+	public ThrownWeaponInfo[] defaultWeaponInfos;
+	public SkillInfo[] defaultSkillInfos;
+	public SkillInfo defaultSkillInfo;
+    private List<IDataObserver> observers;
 
 	public SaveData data;
 	private string path;
@@ -27,6 +33,7 @@ public class SaveLoadManager : MonoSingleton<SaveLoadManager>
 
         observers = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<IDataObserver>().ToList();
         LoadData();
+		//SaveData();
     }
 
 	public void SaveData()
@@ -38,7 +45,8 @@ public class SaveLoadManager : MonoSingleton<SaveLoadManager>
 		}
 
 		data = new SaveData();
-		foreach (IDataObserver observer in observers)
+
+        foreach (IDataObserver observer in observers)
 		{
 			observer.WriteData(ref data);
 		}
@@ -53,25 +61,43 @@ public class SaveLoadManager : MonoSingleton<SaveLoadManager>
 
 	public void LoadData()
 	{
+		bool isNewData = false;
 		string filePath = Path.Combine(path, fileName);
 		if (!File.Exists(filePath))
 		{
 			Debug.LogError(filePath + "Does not exists");
 			if (!File.Exists(filePath))
 			{
-				File.Create(filePath);
-			}
+				isNewData = true;
+                File.Create(filePath);
+            }
 		}
-
+		
 		string jsonBase64 = File.ReadAllText(filePath);
-		byte[] jsonByte = System.Convert.FromBase64String(jsonBase64);
-		string jsonStr = System.Text.Encoding.UTF8.GetString(jsonByte);
-		data = JsonUtility.FromJson<SaveData>(jsonStr);
+        byte[] jsonByte = System.Convert.FromBase64String(jsonBase64);
+        string jsonStr = System.Text.Encoding.UTF8.GetString(jsonByte);
+        data = JsonUtility.FromJson<SaveData>(jsonStr);
 
-		foreach (IDataObserver observer in observers)
+        foreach (IDataObserver observer in observers)
+        {
+            observer.ReadData(data);
+        }
+        Debug.Log("Data Loaded");
+
+
+        if(isNewData)
 		{
-			observer.ReadData(data);
-		}
-		Debug.Log("Data Loaded");
-	}
+			Debug.Log("New Data");
+			data = new SaveData();
+			data.weaponInfoList = defaultWeaponInfos.ToList();
+			data.skillInfoList = defaultSkillInfos.ToList();
+            data.SkillInfo = defaultSkillInfo;
+
+            jsonStr = JsonUtility.ToJson(data, true);
+            jsonByte = System.Text.Encoding.UTF8.GetBytes(jsonStr);
+            jsonBase64 = System.Convert.ToBase64String(jsonByte);
+
+            File.WriteAllText(filePath, jsonBase64);
+        }
+    }
 }

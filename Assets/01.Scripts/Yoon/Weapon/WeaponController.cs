@@ -5,34 +5,31 @@ using System;
 public class WeaponController : MonoBehaviour
 {
     public Action<ThrownWeaponStat> OnWeaponStatChanged;
-    public Action<TreasureData> OnTresureDataChanged;
+    public Action<SkillData> OnTresureDataChanged;
 
     [SerializeField] private List<ThrownWeaponStat> weaponStats = new ();
     private Dictionary<string, ThrownWeaponStat> weaponStatContainer = new ();
 
-    [SerializeField] private List<TreasureData> tresureDatas = new();
-    private Dictionary<string, TreasureData> tresureDataContainer = new();
+    [SerializeField] private List<SkillData> tresureDatas = new();
+    private Dictionary<string, SkillData> tresureDataContainer = new();
 
     private ThrownWeaponStat currentWeaponStat;
-    private TreasureData currentTreasureData;
+    public ThrownWeaponStat CurrentWeaponStat => currentWeaponStat;
+    private SkillData currentSkillData;
+    public SkillData CurrentSkillData => currentSkillData;
 
     private void Awake()
     {
         foreach (var stat in weaponStats)
         {
+            stat.CurrentThrowCount = 0;
             weaponStatContainer.Add(stat.WeaponId, stat);
         }
 
         foreach (var data in tresureDatas)
         {
-            tresureDataContainer.Add(data.TreasureId, data);
+            tresureDataContainer.Add(data.SkillId, data);
         }
-    }
-
-    private void Start()
-    {
-        // 마지막에 장착했었던 WeaponStat, TreasureData 기억해서 장착
-        AttemptChangeTresureData("Sturn");
     }
 
     public void AttemptChangeWeaponStat(string weaponId)
@@ -40,7 +37,6 @@ public class WeaponController : MonoBehaviour
         if (weaponStatContainer.ContainsKey(weaponId))
         {
             currentWeaponStat = weaponStatContainer[weaponId];
-            Debug.Log(weaponId);
             RequestChangeWeaponStat();
         }
         else
@@ -54,22 +50,23 @@ public class WeaponController : MonoBehaviour
         OnWeaponStatChanged?.Invoke(currentWeaponStat);
     }
 
-    public void AttemptChangeTresureData(string tresureId)
+    public void AttemptChangeSKillData(SkillType skillType)
     {
-        if (tresureDataContainer.ContainsKey(tresureId))
+        string skillTypeString = skillType.ToString();
+        if (tresureDataContainer.ContainsKey(skillTypeString))
         {
-            currentTreasureData = tresureDataContainer[tresureId];
+            currentSkillData = tresureDataContainer[skillTypeString];
             RequestChangeTresureData();
         }
         else
         {
-            Debug.LogError($"tresureDataContainer is not exist {tresureId} key...");
+            Debug.LogError($"skillDataContainer is not exist {skillTypeString} key...");
         }
     }
 
     private void RequestChangeTresureData()
     {
-        OnTresureDataChanged?.Invoke(currentTreasureData);
+        OnTresureDataChanged?.Invoke(currentSkillData);
     }
 
 }

@@ -223,7 +223,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -214601843477773243, guid: 0ab6dc4ae6164464ea3b88179841eee6, type: 3}
       propertyPath: m_Color.a
-      value: 1
+      value: 0.4745098
       objectReference: {fileID: 0}
     - target: {fileID: -214601843477773243, guid: 0ab6dc4ae6164464ea3b88179841eee6, type: 3}
       propertyPath: m_Color.b
@@ -346,6 +346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveMultiplier: 1
+  boundX: 0
 --- !u!1 &1816820552779688598 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -3283625510233190330, guid: 0ab6dc4ae6164464ea3b88179841eee6, type: 3}
@@ -364,6 +365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveMultiplier: 0.3
+  boundX: 0
 --- !u!4 &3603063765604206792 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8743796074244190744, guid: 0ab6dc4ae6164464ea3b88179841eee6, type: 3}
@@ -387,6 +389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveMultiplier: 0
+  boundX: 0
 --- !u!1 &4643517577057156690 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 804321300388119682, guid: 0ab6dc4ae6164464ea3b88179841eee6, type: 3}
@@ -405,6 +408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveMultiplier: 1
+  boundX: 0
 --- !u!1 &5530240621932092269 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8653719598885068355, guid: 0ab6dc4ae6164464ea3b88179841eee6, type: 3}
@@ -441,6 +445,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveMultiplier: 0.4
+  boundX: 0
 --- !u!1 &8206241516984271210 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -4991397436061303878, guid: 0ab6dc4ae6164464ea3b88179841eee6, type: 3}
@@ -459,6 +464,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveMultiplier: 0.6
+  boundX: 0
 --- !u!1 &8898026457061977741 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3469091949063492701, guid: 0ab6dc4ae6164464ea3b88179841eee6, type: 3}
@@ -477,6 +483,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveMultiplier: 0.8
+  boundX: 0
 --- !u!1 &9068812417871912512 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3927833269135221904, guid: 0ab6dc4ae6164464ea3b88179841eee6, type: 3}
@@ -495,3 +502,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveMultiplier: 1
+  boundX: 0

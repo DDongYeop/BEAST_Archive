@@ -16,3 +16,5 @@ MonoBehaviour:
   weaponName: "\uB3C4\uB07C"
   weaponSprite: {fileID: 21300000, guid: 9399db919009cc347995c1bc3f3459ca, type: 3}
   spritePivotPosition: {x: 0, y: 0}
+  weaponDescription: "\uBB34\uAC81\uACE0, \uB0A0\uCE74\uB85C\uC6CC \uBE60\uB974\uAC8C
+    \uB5A8\uC5B4\uC9C0\uB294 \uBB34\uAE30\uC785\uB2C8\uB2E4."

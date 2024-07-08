@@ -3,18 +3,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 
 enum Pos
 {
-    TOP = 77,
+    TOP = 74,
     MID = 33,
     LOW  = 0,
 }
@@ -29,7 +28,6 @@ public class Scene_WeaponSelect : UI_Scene, IDataObserver
     [SerializeField] private float _snapForce;
 
     private int _curShowWeaponIndex = -1;
-    private int _curWeaponIndex = -1;
     private List<ThrownWeaponInfo> _selectedWeapons = new List<ThrownWeaponInfo>();
 
     private bool _isMouseDown = false;
@@ -53,6 +51,7 @@ public class Scene_WeaponSelect : UI_Scene, IDataObserver
         _contentPanel = _horGroup.gameObject.GetComponent<RectTransform>();
 
         BindEvent(Get<ScrollRect>("ScrollRect_WeaponSlots").gameObject, (PointerEventData _data, Transform _transform) => { _isMouseDown = true; }, Define.ClickType.Down);
+        //BindEvent(Get<ScrollRect>("ScrollRect_WeaponSlots").gameObject, (PointerEventData _data, Transform _transform) => { _isMouseDown = true; }, Define.ClickType.Move);
         BindEvent(Get<ScrollRect>("ScrollRect_WeaponSlots").gameObject, (PointerEventData _data, Transform _transform) => { _isMouseDown = false; }, Define.ClickType.Up);
 
         BindEvent(Get<Image>("Image_Close").gameObject, CloseButton);
@@ -62,10 +61,6 @@ public class Scene_WeaponSelect : UI_Scene, IDataObserver
         DestroySlot();
         BindSlot();
 
-        //if(_selectedWeapons != null)
-        //{
-
-        //}
         StartCoroutine(scoll());
 
 
@@ -74,11 +69,23 @@ public class Scene_WeaponSelect : UI_Scene, IDataObserver
             Destroy(_child.gameObject);
         }
 
+        
+        SaveLoadManager.Instance.LoadData();
+        
+        Invoke("LateInit", 0.05f);   
+    }
+
+    private void LateInit()
+    {
+        foreach (var _item in _selectedWeapons)
+        {
+            _contentPanel.transform.Find("Image_" + _item.WeaponId).Find("Image_Fill").transform.Find("Image_Outline").gameObject.SetActive(true);
+        }
+
         foreach (var _item in _selectedWeapons)
         {
             BindSelectSlot(_item);
         }
-
 
         _contentPanel.localPosition = Vector3.zero;
         _curShowWeaponIndex = Mathf.RoundToInt(0 - _contentPanel.localPosition.x / (_slotSize.x + _horGroup.spacing));
@@ -105,6 +112,9 @@ public class Scene_WeaponSelect : UI_Scene, IDataObserver
 
             }
         }
+
+        Get<TextMeshProUGUI>("Text_WeaponInfo").text = $"{_weaponsData[_curShowWeaponIndex].WeaponName}\n<size=30>{_weaponsData[_curShowWeaponIndex].WeaponDescription}</size>";
+
     }
 
     IEnumerator  scoll()
@@ -122,6 +132,7 @@ public class Scene_WeaponSelect : UI_Scene, IDataObserver
         {
             if(_shakedTime + 0.6f <= Time.time)
             {
+                Handheld.Vibrate();
                 Get<Image>("Image_SelectedWeapons").rectTransform.DOShakeAnchorPos(0.5f, 30, 45, 0);
                 _shakedTime = Time.time;
             }
@@ -141,12 +152,9 @@ public class Scene_WeaponSelect : UI_Scene, IDataObserver
     protected override void OnEnable()
     {
         base.OnEnable();
-        SaveLoadManager.Instance.Init();
+        //SaveLoadManager.Instance.Init();
 
-        foreach (var _item in _selectedWeapons)
-        {
-            _contentPanel.transform.Find("Image_" + _item.WeaponId).Find("Image_Fill").transform.Find("Image_Outline").gameObject.SetActive(true);
-        }
+        
     }
 
     protected override void Start()
@@ -175,9 +183,9 @@ public class Scene_WeaponSelect : UI_Scene, IDataObserver
             _newSlot.GetComponent<RectTransform>().sizeDelta = _slotSize;
 
 
-            Image _icon = _newSlot.transform.Find("Image_Fill").GetChild(0).GetComponent<Image>();
+            Image _icon = _newSlot.transform.Find("Image_Fill").Find("Image_Icon").GetComponent<Image>();
             _icon.sprite = _weaponsData[i].WeaponSprite;
-            _icon.color = Color.white;
+            _icon.color = UnityEngine.Color.white;
             _icon.preserveAspect = true;
 
 
@@ -240,6 +248,8 @@ public class Scene_WeaponSelect : UI_Scene, IDataObserver
 
         //_curWeaponIndex = _index;
         //SwipeUI(_selectedSlot, _curWeaponIndex);
+        SaveLoadManager.Instance.SaveData();
+
     }
 
     private void BindSelectSlot(ThrownWeaponInfo _data)
@@ -304,7 +314,9 @@ public class Scene_WeaponSelect : UI_Scene, IDataObserver
             _curShowWeaponIndex = Mathf.RoundToInt(0 - _contentPanel.localPosition.x / (_slotSize.x + _horGroup.spacing));
 
 
-            foreach(Transform _child in _contentPanel.transform)
+            Get<TextMeshProUGUI>("Text_WeaponInfo").text = $"{_weaponsData[_curShowWeaponIndex].WeaponName}\n\n<size=20>{_weaponsData[_curShowWeaponIndex].WeaponDescription}</size>";
+
+            foreach (Transform _child in _contentPanel.transform)
             {
                 if(_child.GetSiblingIndex() == _curShowWeaponIndex - 1)
                 {
@@ -353,13 +365,16 @@ public class Scene_WeaponSelect : UI_Scene, IDataObserver
         }
     }
 
+    SkillInfo _curSkill;
     public void WriteData(ref SaveData data)
     {
-        data.weaponInfoList = GetWeapons(); 
+        data.weaponInfoList = GetWeapons();
+        data.SkillInfo = _curSkill;
     }
 
     public void ReadData(SaveData data)
     {
+        _curSkill = data?.SkillInfo;
         var _newData = data?.weaponInfoList;
 
         if(_newData != null)

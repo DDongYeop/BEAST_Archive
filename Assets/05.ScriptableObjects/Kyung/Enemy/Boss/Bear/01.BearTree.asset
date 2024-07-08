@@ -154,7 +154,7 @@ MonoBehaviour:
   State: 0
   Started: 0
   Guid: fc07e9dac268a674b9defb285e2ddf23
-  Position: {x: 793, y: 424}
+  Position: {x: 775, y: 425}
   Blackboard:
     MoveToPosition: {x: 0, y: 0, z: 0}
     MoveToObject: {fileID: 0}
@@ -213,7 +213,7 @@ MonoBehaviour:
   State: 0
   Started: 0
   Guid: 5fa8383141f3bea458aca96de9cd1801
-  Position: {x: 172, y: 426}
+  Position: {x: 177, y: 432}
   Blackboard:
     MoveToPosition: {x: 0, y: 0, z: 0}
     MoveToObject: {fileID: 0}
@@ -228,7 +228,7 @@ MonoBehaviour:
   _shakePower: 2
   _shakeTime: 2
   IsAttackStop: 1
-  _speed: 4
+  _speed: 4.5
   _addDash: 1
   _addPos: {x: -2.06, y: 5.5, z: 0}
 --- !u!114 &5409975921185164101
@@ -246,15 +246,15 @@ MonoBehaviour:
   State: 0
   Started: 0
   Guid: a14eac9badc2e8c4980d52653d728677
-  Position: {x: 635, y: 416.01587}
+  Position: {x: 617, y: 429}
   Blackboard:
     MoveToPosition: {x: 0, y: 0, z: 0}
     MoveToObject: {fileID: 0}
   Brain: {fileID: 0}
   Description: IsAttack03
-  _condition: 0
-  _benchmark: 0
-  _isDown: 0
+  _condition: 3
+  _benchmark: 10
+  _isDown: 1
   _coolTime: 4
   _animationKey: IsAttack03
   _isShake: 0
@@ -306,15 +306,15 @@ MonoBehaviour:
   State: 0
   Started: 0
   Guid: 421f4aa066bce3f45a5ed37fb1db13ad
-  Position: {x: 476.99994, y: 416.01587}
+  Position: {x: 480.00006, y: 432.00006}
   Blackboard:
     MoveToPosition: {x: 0, y: 0, z: 0}
     MoveToObject: {fileID: 0}
   Brain: {fileID: 0}
   Description: IsAttack02
-  _condition: 0
-  _benchmark: 0
-  _isDown: 0
+  _condition: 3
+  _benchmark: 10
+  _isDown: 1
   _coolTime: 6
   _animationKey: IsAttack02
   _isShake: 0
@@ -336,16 +336,16 @@ MonoBehaviour:
   State: 0
   Started: 0
   Guid: 6304f3fc905dde84796ff412210fa985
-  Position: {x: 319.00003, y: 410.0159}
+  Position: {x: 322, y: 424}
   Blackboard:
     MoveToPosition: {x: 0, y: 0, z: 0}
     MoveToObject: {fileID: 0}
   Brain: {fileID: 0}
   Description: IsAttack01
-  _condition: 0
-  _benchmark: 0
-  _isDown: 0
-  _coolTime: 30
+  _condition: 3
+  _benchmark: 15
+  _isDown: 1
+  _coolTime: 15
   _animationKey: IsAttack01
   _isShake: 1
   _shakePower: 0

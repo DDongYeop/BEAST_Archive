@@ -21,6 +21,7 @@ public class Scene_OnEnd : UI_Scene
 
         BindEvent(Get<Image>("Image_Map").gameObject, (PointerEventData _data, Transform _transform) =>
         {
+            Time.timeScale = 1;
             RaycastTarget(false);
 
             PlayerPrefs.SetString("scene", "Panel_Menu");
@@ -29,12 +30,14 @@ public class Scene_OnEnd : UI_Scene
 
         BindEvent(Get<Image>("Image_Weapon").gameObject, (PointerEventData _data, Transform _transform) =>
         {
+            Time.timeScale = 1;
             RaycastTarget(false);
 
             PlayerPrefs.SetString("scene", "Panel_WeaponSelect");
             sceneManager.Instance.ChangeSceen("Menu 2", TransitionsEffect.circleWap);
         });
 
+        BindEvent(Get<Image>("Image_Pause").gameObject, (PointerEventData _data, Transform _transform) => { OnGamePuase(); });
     }
 
 
@@ -60,14 +63,58 @@ public class Scene_OnEnd : UI_Scene
         StartCoroutine(GameOverRoutine(false));
     }
 
+    private void OnGamePuase()
+    {
+        StartCoroutine(GamePauseRoutine());
+    }
+
+    private IEnumerator GamePauseRoutine()
+    {
+        Get<Image>("Image_Pause").raycastTarget = false;
+
+        if (TryGetComponent(out Image _image))
+        {
+            _image.DOFade(0.75f, 0.2f);
+        }
+
+        BindEvent(Get<Image>("Image_Play").gameObject, (PointerEventData _data, Transform _transform) =>
+        {
+            Time.timeScale = 1;
+            if (TryGetComponent(out Image _image))
+            {
+                _image.DOFade(0f, 0.2f);
+            }
+
+            Get<Image>("Image_EndPanel").rectTransform.DOAnchorPosY(-400, 0.2f);
+            Get<Image>("Image_Pause").raycastTarget = true;
+
+        });
+
+        float playTime = GameManager.Instance.PlayTime;
+        string timeType = (playTime / 60).ToString("F0") + ":" + (playTime % 60).ToString("F0");
+        string str = string.Format("{0:D2}:{1:D2}", (int)(playTime / 60), (int)(playTime % 60));
+        Get<TextMeshProUGUI>("Text_PlayTime").text = str;
+
+        Get<TextMeshProUGUI>("Text_VICTORY").text = "일시정지";
+        Get<Image>("Image_EndPanel").rectTransform.DOAnchorPosY(0, 0.2f).onComplete = () =>
+        {
+            Time.timeScale = 0;
+        };
+
+        yield return null;
+    }
+
     private IEnumerator GameOverRoutine(bool IsClear)
     {
+        Get<Image>("Image_Pause").raycastTarget = false;
         //BindEvent(Get<Image>("Image_Play").gameObject, )
 
         Get<Image>("Image_Play").transform.GetChild(0).GetComponent<Image>().sprite = (IsClear ? _playBtn : _rePlayBtn);
 
         if (!IsClear)
         {
+            Get<Image>("Image_Play").gameObject.SetActive(true);
+
             Get<TextMeshProUGUI>("Text_VICTORY").text = "토벌 실패";
             BindEvent(Get<Image>("Image_Play").gameObject, (PointerEventData _data, Transform _transform) => 
             {
@@ -77,25 +124,31 @@ public class Scene_OnEnd : UI_Scene
         }
         else
         {
+            string[] _str = SceneManager.GetActiveScene().name.Split('.');
+            string _newScene = (int.Parse(_str[0]) + 1).ToString() + "." + _str[1];
+
             Get<TextMeshProUGUI>("Text_VICTORY").text = "토벌 성공";
 
             BindEvent(Get<Image>("Image_Play").gameObject, (PointerEventData _data, Transform _transform) =>
             {
                 RaycastTarget(false);
 
-                PlayerPrefs.SetString("scene", "Panel_Menu");
-                string[] str = SceneManager.GetActiveScene().name.Split('.');
-                string _newScene = (int.Parse(str[0]) + 1).ToString() + "." + str[1];
-                    if (Application.CanStreamedLevelBeLoaded(_newScene))
-                    {
-                        PlayerPrefs.SetInt(str[1], (int.Parse(str[0]) + 1));
-                        sceneManager.Instance.ChangeSceen(_newScene, TransitionsEffect.circleWap);
-                    }
-                    else
-                    {
-                        Get<Image>("Image_Play").transform.GetChild(0).GetComponent<Image>().sprite = _rePlayBtn;
-                    }
+                if (Application.CanStreamedLevelBeLoaded(_newScene))
+                {
+                    sceneManager.Instance.ChangeSceen(_newScene, TransitionsEffect.circleWap);
+                }
+                else
+                {
+                    Get<Image>("Image_Play").transform.GetChild(0).GetComponent<Image>().sprite = _rePlayBtn;
+                    sceneManager.Instance.ChangeSceen(SceneManager.GetActiveScene().name, TransitionsEffect.circleWap);
+                }
             });
+
+            if (!Application.CanStreamedLevelBeLoaded(_newScene))
+            {
+                Get<Image>("Image_Play").gameObject.SetActive(false);
+                //Get<Image>("Image_Play").transform.GetChild(0).GetComponent<Image>().sprite = _rePlayBtn;
+            }
         }
 
         if (TryGetComponent(out Image _image))

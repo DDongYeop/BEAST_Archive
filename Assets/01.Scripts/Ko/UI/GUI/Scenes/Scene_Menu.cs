@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,7 +40,6 @@ public class Scene_Menu : UI_Scene
 
     private int _curIndex = -1;
 
-
     protected override void Init()
     {
         base.Init();
@@ -50,20 +50,55 @@ public class Scene_Menu : UI_Scene
         _contentPanel = _horGroup.gameObject.GetComponent<RectTransform>(); 
 
         _scrollRect.onValueChanged.AddListener(OnScrollMove);
+        
+        //_scrollRect.OnInitializePotentialDrag
 
         BindEvent(Get<ScrollRect>("ScrollRect_Levels").gameObject, (PointerEventData _data, Transform _transform) => { _isMouseDown = true; }, Define.ClickType.Down);
+        //BindEvent(Get<ScrollRect>("ScrollRect_Levels").gameObject, (PointerEventData _data, Transform _transform) => { _isMouseDown = true; }, Define.ClickType.Move);
         BindEvent(Get<ScrollRect>("ScrollRect_Levels").gameObject, (PointerEventData _data, Transform _transform) => { _isMouseDown = false; }, Define.ClickType.Up);
-
+        //BindEvent(_scrollRect.gameObject, (PointerEventData _data, Transform _transform) => { _isMouseDown = true; }, Define.ClickType.OnDrag);
+        //BindEvent(_scrollRect.gameObject, (PointerEventData _data, Transform _transform) => { _isMouseDown = false; }, Define.ClickType.EndDrag);
         //BindSlot();
 
         _btnSelect = true;
     }
 
+    protected override void Update()
+    {
+        //base.Update();
+
+        //Debug.Log(_isMouseDown);
+
+        //_curIndex = Mathf.RoundToInt(0 - _contentPanel.localPosition.x / (_slotSize.x + _horGroup.spacing));
+
+        //if (_scrollRect.velocity.magnitude < 200 && !_isSnapped && !_isMouseDown)
+        //{
+        //    _scrollRect.velocity = Vector2.zero;
+        //    _snapSpeed += _snapForce * Time.deltaTime;
+
+        //    _contentPanel.localPosition = new Vector3(
+        //        Mathf.MoveTowards(_contentPanel.localPosition.x, 0 - (_curIndex * (_slotSize.x + _horGroup.spacing)), _snapSpeed),
+        //        _contentPanel.localPosition.y,
+        //        _contentPanel.localPosition.z);
+
+
+        //    if (_contentPanel.localPosition.x == 0 - (_curIndex * (_slotSize.x + _horGroup.spacing)))
+        //    {
+        //        _isSnapped = true;
+        //    }
+        //}
+
+        //if (_scrollRect.velocity.magnitude > 200)
+        //{
+        //    _isSnapped = false;
+        //    _snapSpeed = 0;
+        //}
+    }
+
+
     protected override void Start()
     {
         base.Start();
-
-        
     }
 
     protected override void OnEnable()
@@ -77,13 +112,12 @@ public class Scene_Menu : UI_Scene
     {
         yield return new WaitForSeconds(0.1f);
 
-        foreach (Transform _transform in _contentPanel.transform)
+        Button_Menu[] _button_Menus = _contentPanel.GetComponentsInChildren<Button_Menu>();
+
+        foreach(Button_Menu _button in _button_Menus)
         {
-            if (_transform.TryGetComponent(out Button_Menu _button))
-            {
-                BindEvent(_transform.gameObject, OnButtonSelected);
-                _button.ShowUI();
-            }
+            BindEvent(_button.gameObject, OnButtonSelected, Define.ClickType.Click);
+            _button.ShowUI();
         }
     }
 
@@ -115,15 +149,16 @@ public class Scene_Menu : UI_Scene
 
     private void OnButtonSelected(PointerEventData _data, Transform _transform)
     {
+        if (_scrollRect.velocity.magnitude > 100)
+            return;
+
         Debug.Log(_transform.name);
         _btnSelect = false;
 
-        foreach (Transform _item in _contentPanel.transform)
+        Button_Menu[] _button_Menus = _contentPanel.GetComponentsInChildren<Button_Menu>();
+        foreach (Button_Menu _button in _button_Menus)
         {
-            if (_item.TryGetComponent(out Button_Menu _button))
-            {
-                _button.HideUI(_fadeDuration);
-            }
+            _button.HideUI(_fadeDuration);
         }
         
         if(_transform.TryGetComponent(out Button_Menu _menu))
@@ -143,7 +178,6 @@ public class Scene_Menu : UI_Scene
     private void OnScrollMove(Vector2 _vec)
     {
         _curIndex = Mathf.RoundToInt(0 - _contentPanel.localPosition.x / (_slotSize.x + _horGroup.spacing));
-
 
         if (_scrollRect.velocity.magnitude < 200 && !_isSnapped && !_isMouseDown)
         {

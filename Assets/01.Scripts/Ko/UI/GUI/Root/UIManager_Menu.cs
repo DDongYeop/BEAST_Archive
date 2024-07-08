@@ -23,11 +23,6 @@ public class UIManager_Menu : UI_Root
 
     [SerializeField] private string _defaultScene = "";
 
-    private readonly string FLIP_LEFT = "FlipLeft";
-    private readonly string FLIP_RIGHT = "FlipRight";
-    private readonly string CLOSE = "Close";
-    private readonly string OPEN = "Open";
-
     //private Animator _animator;
 
     private BookState _bookState = BookState.Closed;

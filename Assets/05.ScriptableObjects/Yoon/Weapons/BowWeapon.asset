@@ -16,7 +16,7 @@ MonoBehaviour:
   mainWeaponSprite: {fileID: 21300128, guid: 15b2d2faaecad4bfb9edc6585d94f509, type: 3}
   subWeaponSprite: {fileID: 21300226, guid: 15b2d2faaecad4bfb9edc6585d94f509, type: 3}
   damage: 3
-  throwCount: 1
+  maxThrowCount: 0
   weaponMass: 4.5
   isHeavy: 0
   isSharp: 1

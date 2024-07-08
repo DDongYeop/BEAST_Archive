@@ -11,11 +11,11 @@ public class AgentAnimator : MonoBehaviour
     private readonly int _stunHash = Animator.StringToHash("IsStun");
 
     [Header("Other")]
-    private EnemyBrain _brain;
+    protected EnemyBrain _brain;
     private WeaponStick _weaponStick;
     private EnemyFeedback _enemyFeedback;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _brain = GetComponent<EnemyBrain>();
         Animator = GetComponent<Animator>();
@@ -45,13 +45,13 @@ public class AgentAnimator : MonoBehaviour
 
     #region Event
 
-    public void SetAnimEnd()
+    public virtual void SetAnimEnd()
     {
         _enemyFeedback.ShowAttackTrailFalse();
         
-        if (_brain.CurrentNode)
-            _brain.CurrentNode.OnStop();
-        _brain.CurrentNodeValue = -1;
+        //if (_brain.CurrentNode)
+        //    _brain.CurrentNode.OnStop();
+        //_brain.CurrentNodeValue = -1;
     }
 
     public void RemoveWeaponStick()

@@ -9,6 +9,9 @@ public class Define
         Down,
         Up,
         Move,
-        Click
+        Click,
+        Dragging,
+        OnDrag,
+        EndDrag
     }
 }

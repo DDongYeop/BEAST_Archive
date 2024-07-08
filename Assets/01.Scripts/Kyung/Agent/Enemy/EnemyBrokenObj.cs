@@ -21,10 +21,15 @@ public class EnemyBrokenObj : MonoBehaviour
         weapon.ObjectFall();
         PoolManager.Instance.Pop("Bear_Hit");
 
-        if (weapon.Skill != null) // ∫∏π∞ »Æ¿Œ
+        if (weapon.Skill != null && weapon.SkillData.RunImmediately == false) // Ïä§ÌÇ¨ ÌôïÏù∏
             weapon.UseSkill(transform.root.gameObject);
 
-        _currentHp -= 1;
+        
+        Vector3 pos = transform.position;
+        Color color = Color.yellow;
+        (PoolManager.Instance.Pop("DamagePopup") as DamagePopup)?.SetUp("-" + weapon.Stat.Damage, pos, 60, color);
+        
+        _currentHp -= weapon.Stat.Damage;
         if (_currentHp <= 0)
             BrokenObj();
     }

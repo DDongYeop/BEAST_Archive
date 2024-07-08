@@ -1,35 +1,32 @@
-    using System.Collections;
+using System.Collections;
 using UnityEngine;
 
 public class AgentHealth : MonoBehaviour, IDamageable
 {
     [SerializeField] private HealthSO _healthSO;
 
-    private EnemyBrain _brain;
+    protected EnemyBrain _brain;
     private AgentAnimator _agentAnimator;
 
     private int _currentHp;
     public int CurrentHp => _currentHp;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _healthSO = Instantiate(_healthSO);
     }
 
-    private void Start()
+    protected void Start()
     {
         _brain = GetComponent<EnemyBrain>();
         _agentAnimator = GetComponent<AgentAnimator>();
         _currentHp = _healthSO.MaxHP;
     }
 
-    public void OnDamage(int damage, Vector3 hitPos)
+    public virtual void OnDamage(int damage, Vector3 hitPos)
     {
         _currentHp -= damage;
         _agentAnimator.OnHurt();
-
-        if (_brain.CurrentNode && _brain.CurrentNode.IsAttackStop)
-            _brain.AgentAnimator.SetAnimEnd();
 
         if (_currentHp <= 0)
             StartCoroutine(EnemyDie());

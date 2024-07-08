@@ -6,13 +6,12 @@ using System.ComponentModel;
 public class ThrownWeapon : PoolableMono
 {
     public ThrownWeaponStat Stat;
-    public TreasureData TreasureData { get; private set; }
-    public TreasureSkill Skill { get; private set; }
+    public SkillData SkillData { get; private set; }
+    public WeaponSkill Skill { get; private set; }
 
     private TrailRenderer trail;
     protected Rigidbody2D rigidbody;
     protected Collider2D collider;
-    
 
     private LayerMask weaponLayer;
     private LayerMask garbageLayer;
@@ -20,6 +19,7 @@ public class ThrownWeapon : PoolableMono
     private readonly float gravityDefaultValue = 5f;
     private readonly float lifeTimeAfterFall = 10f;
 
+    private Vector3 initScale;
     private float maxForceValue = 112;
     public bool IsFlying;
 
@@ -30,6 +30,7 @@ public class ThrownWeapon : PoolableMono
             Destroy(Skill);
         }
 
+        transform.localScale = initScale;
         gameObject.layer = weaponLayer;
         rigidbody.gravityScale = 0f;
         rigidbody.mass = Stat.WeaponMass;
@@ -44,6 +45,8 @@ public class ThrownWeapon : PoolableMono
 
         weaponLayer = LayerMask.NameToLayer("Weapon");
         garbageLayer = LayerMask.NameToLayer("Garbage");
+
+        initScale = transform.localScale;
     }
 
     protected virtual void Update()
@@ -59,12 +62,27 @@ public class ThrownWeapon : PoolableMono
 
     }
 
-    public void ThrowThisWeapon(Vector2 force, TreasureData treasureData)
+    public void ThrowThisWeapon(Vector2 force, SkillData skillData)
     {
-        if (treasureData != null)
+        if (Stat.IsOverThrow)
         {
-            TreasureData = treasureData;
-            CreateSkillComponent(TreasureData.TreasureType);
+            Scene_InGame _UI = UIManager_InGame.Instance.GetScene("Scene_InGame") as Scene_InGame;
+            //StartCoroutine(_UI.ItemPopup(null, "무기 소진"));
+
+            Debug.LogError("최대 발사 횟수를 초과하였습니다.");
+            PoolManager.Instance.Push(this);
+            return;
+        }
+
+        if (skillData != null)
+        {
+            SkillData = skillData;
+            CreateSkillComponent(SkillData.SkillType);
+
+            if (SkillData.RunImmediately)
+            {
+                UseSkill(GameManager.Instance.EnemyBrain.transform.root.gameObject);
+            }
         }
 
         transform.up = force.normalized;
@@ -72,18 +90,20 @@ public class ThrownWeapon : PoolableMono
         rigidbody.gravityScale = gravityDefaultValue;
         IsFlying = true;
         trail.enabled = true;
+
+        Stat.CurrentThrowCount++;
     }
 
     // 스킬 컴포넌트 생성
-    private void CreateSkillComponent(TreasureType treasureType)
+    private void CreateSkillComponent(SkillType skillName)
     {
-        Type skillType = Type.GetType($"{treasureType}Component");
-        Skill = gameObject.AddComponent(skillType) as TreasureSkill;
+        Type skillType = Type.GetType($"{skillName}Skill");
+        Skill = gameObject.AddComponent(skillType) as WeaponSkill;
     }
 
     public void UseSkill(GameObject targetObject)
     {
-        Skill.UseSkill(targetObject.transform, TreasureData.Damage, TreasureData.Duration);
+        Skill.UseSkill(targetObject.transform, SkillData);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -99,6 +119,7 @@ public class ThrownWeapon : PoolableMono
 
     protected virtual void OnGroundCollisionEvent()
     {
+        GameManager.Instance.ComboReset();
         trail.Clear();
     }
 
