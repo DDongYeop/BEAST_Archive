@@ -105,6 +105,7 @@ public class Scene_Menu : UI_Scene
     {
         base.OnEnable();
 
+        //SaveLoadManager.Instance.LoadData();
         StartCoroutine(EnableRoutine());    
     }
 

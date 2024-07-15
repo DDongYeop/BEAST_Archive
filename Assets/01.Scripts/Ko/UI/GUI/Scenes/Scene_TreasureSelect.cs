@@ -112,7 +112,7 @@ public class Scene_TreasureSelect : UI_Scene, IDataObserver
             return;
         }
 
-        SaveLoadManager.Instance.SaveData();
+        //SaveLoadManager.Instance.SaveData();
 
         UIManager_Menu.Instance.ShowScene("Panel_Menu");
         UIManager_Menu.Instance.HideScene("Panel_TreasureSelect");
@@ -127,14 +127,14 @@ public class Scene_TreasureSelect : UI_Scene, IDataObserver
             _newSlot.GetComponent<RectTransform>().sizeDelta = _slotSize;
 
 
-            Image _icon = _newSlot.transform.Find("Image_Fill").Find("Image_Icon").GetComponent<Image>();
+            Image _icon = _newSlot.transform.Find("Image_Fill").Find("Image_InSide").Find("Image_Icon").GetComponent<Image>();
             _icon.sprite = _SkillData[i].SkillSprite;
             _icon.color = Color.white;
             _icon.preserveAspect = true;
 
             if (!_SkillData[i].IsActive)
             {
-                _newSlot.transform.Find("Image_Fill").Find("Image_Chain").gameObject.SetActive(true);
+                _newSlot.transform.Find("Image_Fill").Find("Image_InSide").Find("Image_Chain").gameObject.SetActive(true);
             }
 
             if (_newSlot.transform.Find("Image_Fill").Find("Text_Name").TryGetComponent(out TextMeshProUGUI _text))
@@ -179,7 +179,6 @@ public class Scene_TreasureSelect : UI_Scene, IDataObserver
             _transform.Find("Image_Fill").transform.Find("Image_Outline").gameObject.SetActive(true);
             _curSkill = _newSkill;
         }
-
         SaveLoadManager.Instance.SaveData();
 
         //_curWeaponIndex = _index;
@@ -210,6 +209,7 @@ public class Scene_TreasureSelect : UI_Scene, IDataObserver
         if (_scrollRect.velocity.magnitude > 0)
         {
             _curShowWeaponIndex = Mathf.RoundToInt(0 - _contentPanel.localPosition.x / (_slotSize.x + _horGroup.spacing));
+            _curShowWeaponIndex = Mathf.Clamp(_curShowWeaponIndex, 0, _SkillData.Length - 1);
 
             Get<TextMeshProUGUI>("Text_WeaponInfo").text = $"{_SkillData[_curShowWeaponIndex].SkillName}\n\n<size=20>{_SkillData[_curShowWeaponIndex].SkillDescription}</size>";
 
@@ -266,7 +266,7 @@ public class Scene_TreasureSelect : UI_Scene, IDataObserver
     public void WriteData(ref SaveData data)
     {
         data.SkillInfo = _curSkill;
-        data.weaponInfoList = _curWeapons;
+       // data.weaponInfoList = _curWeapons;
     }
 
     public void ReadData(SaveData data)

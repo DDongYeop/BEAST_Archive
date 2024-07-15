@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Scene_LevelSelect : UI_Scene
+public class Scene_LevelSelect : UI_Scene, IDataObserver
 {
     [SerializeField] private Transform _content;
     [SerializeField] private GameObject _stageObj;
@@ -19,6 +19,8 @@ public class Scene_LevelSelect : UI_Scene
     private ScrollRect _scrollRect;
     private RectTransform _contentPanel;
     private HorizontalLayoutGroup _horGroup;
+
+    private SaveData _saveData;
 
     private int _curIndex = -1;
 
@@ -62,20 +64,24 @@ public class Scene_LevelSelect : UI_Scene
             Destroy(child.gameObject);
         }
 
-
-        foreach(var _scene in _sceneNames)
+        for(int i = 0; i < _sceneNames.Count; i++)
         {
             GameObject _newScene = Instantiate(_stageObj, _content);
-            
+            _newScene.name = "Image_" + _sceneNames[i];
 
-            if(_newScene.TryGetComponent(out RectTransform _rect))
+            if (_newScene.TryGetComponent(out RectTransform _rect))
             {
                 _rect.sizeDelta = _slotSize;
             }
 
-            if(_newScene.TryGetComponent(out Button_Level _button))
+            if (_newScene.TryGetComponent(out Button_Level _button))
             {
-                _button.InitScene(_scene);
+                _button.InitScene(_sceneNames[i]);
+
+                if (!_saveData.level.Levels[_data.StartLevelIndex - 1 + i])
+                {
+                    _button.Lock();
+                }
             }
         }
     }
@@ -107,5 +113,15 @@ public class Scene_LevelSelect : UI_Scene
             _isSnapped = false;
             _snapSpeed = 0;
         }
+    }
+
+    public void WriteData(ref SaveData data)
+    {
+        
+    }
+
+    public void ReadData(SaveData data)
+    {
+        _saveData = data;
     }
 }

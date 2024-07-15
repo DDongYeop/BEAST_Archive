@@ -1,9 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 enum BookState
@@ -17,8 +13,11 @@ enum BookState
     Page6,
 }
 
-public class UIManager_Menu : UI_Root
+public class UIManager_Menu : UI_Root, IDataObserver
 {
+    [SerializeField] private ThrownWeaponInfo[] defaultWeaponInfos;
+    [SerializeField] private SkillInfo defaultSkillInfo;
+
     public static UIManager_Menu Instance;
 
     [SerializeField] private string _defaultScene = "";
@@ -58,7 +57,7 @@ public class UIManager_Menu : UI_Root
     {
         base.Start();
 
-
+        //SaveLoadManager.Instance.LoadData();
         //BindEvent(Get<Image>("Image_Book").gameObject, BookOpen, Define.ClickType.Click);
 
 
@@ -106,6 +105,23 @@ public class UIManager_Menu : UI_Root
         Get<Image>("Image_Page" + ((int)_bookState).ToString()).gameObject.SetActive(false);
         _bookState = (BookState)num;
         Get<Image>("Image_Page" + ((int)_bookState).ToString()).gameObject.SetActive(true);
+    }
+
+    public void WriteData(ref SaveData data)
+    {
+        if(data.weaponInfoList.Count < 1)
+            data.weaponInfoList = defaultWeaponInfos.ToList();
+
+        data.SkillInfo ??= defaultSkillInfo;
+    }
+
+    public void ReadData(SaveData data)
+    {
+        if (data == null || data.weaponInfoList == null || data.weaponInfoList.Count == 0 || data.SkillInfo == null)
+        {
+            SaveLoadManager.Instance.SaveData();
+            Debug.Log("ù ������");
+        }
     }
 
     //private IEnumerator PageChangeRoutine(int num)

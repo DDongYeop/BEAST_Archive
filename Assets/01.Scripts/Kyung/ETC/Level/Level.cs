@@ -4,7 +4,7 @@ using System;
 public class Level : IDataObserver
 {
     public bool[] Levels = new bool[10]
-        { false, false, false, false, false, false, false, false, false, false }; 
+        { true, false, false, false, false, false, false, false, false, false }; 
     
     public void WriteData(ref SaveData data)
     {

@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_bossName: Bear
   m_maxLevel: 3
+  m_startLevelIndex: 1

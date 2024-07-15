@@ -11,6 +11,8 @@ public class UI_EventHandler : MonoBehaviour, IPointerClickHandler, IPointerDown
     public Action<PointerEventData, Transform> OnMoveHandler;
     public Action<PointerEventData, Transform> OnUpHandler;
 
+    public bool Enable = true;
+
     //public Action<PointerEventData, Transform> OnBeginDragHandler;
     //public Action<PointerEventData, Transform> OnDragHandler;
     //public Action<PointerEventData, Transform> OnEndDragHandler;
@@ -32,21 +34,25 @@ public class UI_EventHandler : MonoBehaviour, IPointerClickHandler, IPointerDown
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        OnClickHandler?.Invoke(eventData, transform);
+        if(Enable)
+            OnClickHandler?.Invoke(eventData, transform);
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        OnDownHandler?.Invoke(eventData, transform);
+        if (Enable)
+            OnDownHandler?.Invoke(eventData, transform);
     }
 
     public void OnPointerMove(PointerEventData eventData)
     {
-        OnMoveHandler?.Invoke(eventData, transform);
+        if (Enable)
+            OnMoveHandler?.Invoke(eventData, transform);
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        OnUpHandler?.Invoke(eventData, transform);
+        if (Enable)
+            OnUpHandler?.Invoke(eventData, transform);
     }
 }

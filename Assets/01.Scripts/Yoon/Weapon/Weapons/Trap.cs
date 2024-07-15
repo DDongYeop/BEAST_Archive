@@ -71,7 +71,6 @@ public class Trap : ThrownWeapon
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.name);
         if (collision.CompareTag(collisionTagName))
         {
             sturnComponent.SturnTarget(collision.transform, sturnTime);

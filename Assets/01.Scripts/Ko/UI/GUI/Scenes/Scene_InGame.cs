@@ -29,7 +29,7 @@ public class Scene_InGame : UI_Scene, IDataObserver
         SaveLoadManager.Instance.LoadData();
 
         weaponController = GameManager.Instance.PlayerTrm.Find("WeaponController").GetComponent<WeaponController>();
-        weaponController.AttemptChangeSKillData(_skillInfo.SkillType);
+
         Get<Image>("Image_TreasureIcon").sprite = _skillInfo.SkillSprite;
         InitItem();
 
@@ -44,6 +44,8 @@ public class Scene_InGame : UI_Scene, IDataObserver
     
     private void InitItem()
     {
+        weaponController.AttemptChangeSKillData(_skillInfo.SkillType);
+
         for (int i = 0; i < 3; i++)
         {
             BindEvent(Get<Image>($"Image_ItemSelector{i + 1}").gameObject, OnSelectItem, Define.ClickType.Click);

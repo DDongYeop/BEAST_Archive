@@ -12,7 +12,14 @@ public class Scene_OnEnd : UI_Scene
 {
     [SerializeField] private Sprite _playBtn;
     [SerializeField] private Sprite _rePlayBtn;
-    
+
+    protected override void Init()
+    {
+        base.Init();
+
+        Bind<GameObject>();
+    }
+
     protected override void Start()
     {
         base.Start();
@@ -96,6 +103,9 @@ public class Scene_OnEnd : UI_Scene
         Get<TextMeshProUGUI>("Text_PlayTime").text = str;
 
         Get<TextMeshProUGUI>("Text_VICTORY").text = "일시정지";
+
+       
+
         Get<Image>("Image_EndPanel").rectTransform.DOAnchorPosY(0, 0.2f).onComplete = () =>
         {
             Time.timeScale = 0;
@@ -157,14 +167,30 @@ public class Scene_OnEnd : UI_Scene
             _image.DOFade(0.75f, 0.6f);
         }
 
-        Get<TextMeshProUGUI>("Text_PlayTime").text = "";
-        Get<Image>("Image_EndPanel").rectTransform.anchoredPosition = new Vector2(0, -400f);
+        
 
-        float playTime = GameManager.Instance.PlayTime;
-        string timeType = (playTime / 60).ToString("F0") + ":" + (playTime % 60).ToString("F0");
-        string str = string.Format("{0:D2}:{1:D2}", (int)(playTime / 60), (int)(playTime % 60));
+        if (IsClear && LevelManager.Instance._newSkill != null)
+        {
+            Get<TextMeshProUGUI>("Text_PlayTime").text = "";
+            Get<TextMeshProUGUI>("Text_Seconde").text = "";
 
-        Get<TextMeshProUGUI>("Text_PlayTime").text = str;
+            Transform _newSkill = transform.Find("Image_EndPanel").Find("NewSkill");
+            _newSkill.gameObject.SetActive(true);
+            _newSkill.Find("Image_Skill").GetComponent<Image>().sprite = LevelManager.Instance._newSkill.SkillSprite;
+            _newSkill.Find("Text_Skill").GetComponent<TextMeshProUGUI>().text = LevelManager.Instance._newSkill.SkillName;
+        }
+        else
+        {
+            Get<TextMeshProUGUI>("Text_PlayTime").text = "";
+            Get<Image>("Image_EndPanel").rectTransform.anchoredPosition = new Vector2(0, -400f);
+
+            float playTime = GameManager.Instance.PlayTime;
+            string timeType = (playTime / 60).ToString("F0") + ":" + (playTime % 60).ToString("F0");
+            string str = string.Format("{0:D2}:{1:D2}", (int)(playTime / 60), (int)(playTime % 60));
+
+            Get<TextMeshProUGUI>("Text_PlayTime").text = str;
+        }
+
 
         Get<Image>("Image_EndPanel").rectTransform.DOAnchorPosY(0, 0.5f).onComplete = () =>
         {

@@ -8,6 +8,8 @@ using DG.Tweening;
 
 public abstract class Button_Menu : UI_Base
 {
+    protected bool _enable = true;
+
     protected override void Init()
     {
         base.Init();
@@ -63,6 +65,9 @@ public abstract class Button_Menu : UI_Base
 
     public void ButtonEvent(float _fadeDuration = 0.5f)
     {
+        if (!_enable)
+            return;
+
         GetComponent<Image>().raycastTarget = false;
         CancelInvoke("OnAction");
         Invoke("OnAction", _fadeDuration);

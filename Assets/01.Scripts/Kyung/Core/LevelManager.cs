@@ -6,6 +6,7 @@ using Random = UnityEngine.Random;
 public class LevelManager : MonoSingleton<LevelManager>
 {
     [SerializeField] private int _currentLevelValue;
+    public SkillInfo _newSkill { private set; get; }
 
     public override void Init()
     {
@@ -31,6 +32,7 @@ public class LevelManager : MonoSingleton<LevelManager>
             if (notActiveIndex.Count != 0) //다 활성화 된 상황이 아닐때. 
             {
                 int addIndex = Random.Range(0, notActiveIndex.Count);
+                _newSkill = SaveLoadManager.Instance.data.skillInfoList[addIndex];
                 SaveLoadManager.Instance.data.skillInfoList[addIndex].IsActive = true; //획득
             }
         }

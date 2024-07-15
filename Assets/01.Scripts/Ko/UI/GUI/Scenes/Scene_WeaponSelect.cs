@@ -183,7 +183,7 @@ public class Scene_WeaponSelect : UI_Scene, IDataObserver
             _newSlot.GetComponent<RectTransform>().sizeDelta = _slotSize;
 
 
-            Image _icon = _newSlot.transform.Find("Image_Fill").Find("Image_Icon").GetComponent<Image>();
+            Image _icon = _newSlot.transform.Find("Image_Fill").Find("Image_InSide").Find("Image_Icon").GetComponent<Image>();
             _icon.sprite = _weaponsData[i].WeaponSprite;
             _icon.color = UnityEngine.Color.white;
             _icon.preserveAspect = true;
@@ -369,7 +369,7 @@ public class Scene_WeaponSelect : UI_Scene, IDataObserver
     public void WriteData(ref SaveData data)
     {
         data.weaponInfoList = GetWeapons();
-        data.SkillInfo = _curSkill;
+        //data.SkillInfo = _curSkill;
     }
 
     public void ReadData(SaveData data)

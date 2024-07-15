@@ -338,6 +338,7 @@ GameObject:
   - component: {fileID: 892034061796208439}
   - component: {fileID: 5040636821793309075}
   - component: {fileID: 4935421473880161739}
+  - component: {fileID: 8856492945010430103}
   m_Layer: 8
   m_Name: Trap
   m_TagString: Weapon
@@ -422,7 +423,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.06, y: -0.011061475}
+  m_Offset: {x: -0.27705532, y: -0.01106149}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -433,7 +434,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.18340781, y: 0.7220495}
+  m_Size: {x: 0.61751807, y: 0.7220495}
   m_EdgeRadius: 0
 --- !u!114 &4935421473880161739
 MonoBehaviour:
@@ -453,3 +454,15 @@ MonoBehaviour:
   sturnTime: 2
   isRealTrap: 0
   lifeTime: 20
+--- !u!114 &8856492945010430103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5995235955447411169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3f10cd597433bf4f9707a830aa0baac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

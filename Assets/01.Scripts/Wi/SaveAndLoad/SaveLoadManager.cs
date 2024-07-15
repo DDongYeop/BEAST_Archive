@@ -6,17 +6,19 @@ using UnityEngine;
 [System.Serializable]
 public class SaveData
 {
+	public List<StageSO> stages = new List<StageSO>();
 	public List<ThrownWeaponInfo> weaponInfoList = new List<ThrownWeaponInfo>();
 	public List<SkillInfo> skillInfoList = new List<SkillInfo>();
-	public Level level;
+	public Level level = new Level();
 	public SkillInfo SkillInfo;
 }
 
 public class SaveLoadManager : MonoSingleton<SaveLoadManager>
 {
 	public ThrownWeaponInfo[] defaultWeaponInfos;
-	public SkillInfo[] defaultSkillInfos;
-	public SkillInfo defaultSkillInfo;
+    public StageSO[] defaultStages;
+
+    public SkillInfo defaultSkillInfo;
     private List<IDataObserver> observers;
 
 	public SaveData data;
@@ -61,43 +63,46 @@ public class SaveLoadManager : MonoSingleton<SaveLoadManager>
 
 	public void LoadData()
 	{
-		bool isNewData = false;
 		string filePath = Path.Combine(path, fileName);
 		if (!File.Exists(filePath))
 		{
 			Debug.LogError(filePath + "Does not exists");
 			if (!File.Exists(filePath))
 			{
-				isNewData = true;
-                File.Create(filePath);
-            }
+				File.Create(filePath);
+			}
 		}
-		
+
 		string jsonBase64 = File.ReadAllText(filePath);
-        byte[] jsonByte = System.Convert.FromBase64String(jsonBase64);
-        string jsonStr = System.Text.Encoding.UTF8.GetString(jsonByte);
-        data = JsonUtility.FromJson<SaveData>(jsonStr);
+		byte[] jsonByte = System.Convert.FromBase64String(jsonBase64);
+		string jsonStr = System.Text.Encoding.UTF8.GetString(jsonByte);
+		data = JsonUtility.FromJson<SaveData>(jsonStr);
+
+
+        if (data == null || data.weaponInfoList == null || data.weaponInfoList.Count < 3 || data.SkillInfo == null)
+        {
+			data = new SaveData();
+
+			if(data.weaponInfoList.Count < 1)
+			{
+				data.weaponInfoList = defaultWeaponInfos.ToList();
+			}
+
+			if(data.stages.Count < 1)
+			{
+				data.stages = defaultStages.ToList();
+			}
+
+            data.SkillInfo ??= defaultSkillInfo;
+        }
+		data.level ??= new Level();
+        //data.level.Levels[0] = true;
+
 
         foreach (IDataObserver observer in observers)
-        {
-            observer.ReadData(data);
-        }
-        Debug.Log("Data Loaded");
-
-
-        if(isNewData)
 		{
-			Debug.Log("New Data");
-			data = new SaveData();
-			data.weaponInfoList = defaultWeaponInfos.ToList();
-			data.skillInfoList = defaultSkillInfos.ToList();
-            data.SkillInfo = defaultSkillInfo;
-
-            jsonStr = JsonUtility.ToJson(data, true);
-            jsonByte = System.Text.Encoding.UTF8.GetBytes(jsonStr);
-            jsonBase64 = System.Convert.ToBase64String(jsonByte);
-
-            File.WriteAllText(filePath, jsonBase64);
-        }
+			observer.ReadData(data);
+		}
+		Debug.Log("Data Loaded");
     }
 }

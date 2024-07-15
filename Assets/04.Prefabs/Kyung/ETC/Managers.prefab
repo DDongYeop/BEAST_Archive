@@ -63,10 +63,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49e3f00b6a894ea45ac0a56aa51a852a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultWeaponInfos: []
-  defaultSkillInfos: []
-  defaultSkillInfo: {fileID: 0}
+  defaultWeaponInfos:
+  - {fileID: 11400000, guid: e135dafb77cb11b4ba15656a5acb0bc4, type: 2}
+  - {fileID: 11400000, guid: 303a04bc3e36e694ba3f3be1a45e6d7e, type: 2}
+  - {fileID: 11400000, guid: 5586ce4b504257d4a90bac1b6b3e9b6a, type: 2}
+  defaultStages: []
+  defaultSkillInfo: {fileID: 11400000, guid: 6a4ffc39cedc0e54583937af8d0e0dca, type: 2}
   data:
+    stages: []
     weaponInfoList: []
     skillInfoList: []
     level:
@@ -84,4 +88,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fb6f16aae33fc2488ed4c639243a369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentLevelValue: 1
+  _currentLevelValue: 0

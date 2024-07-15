@@ -423,12 +423,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2065320757153326154}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5243056272249046663}
+  m_Father: {fileID: 7576798262969538382}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -579,7 +579,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7576798262969538382}
-  - {fileID: 3454795143159904555}
   - {fileID: 3157653540418439514}
   - {fileID: 8834483185747688014}
   m_Father: {fileID: 3878173071394130944}
@@ -639,12 +638,12 @@ GameObject:
   - component: {fileID: 5001438807001287547}
   - component: {fileID: 1842603717551190632}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Image_Chain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6956673214860437938
 RectTransform:
   m_ObjectHideFlags: 0
@@ -715,12 +714,12 @@ GameObject:
   - component: {fileID: 8378100492823536931}
   - component: {fileID: 7958350266061459686}
   m_Layer: 5
-  m_Name: Image_Chain
+  m_Name: Image_InSide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7576798262969538382
 RectTransform:
   m_ObjectHideFlags: 0
@@ -733,6 +732,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3454795143159904555}
   - {fileID: 6956673214860437938}
   m_Father: {fileID: 5243056272249046663}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

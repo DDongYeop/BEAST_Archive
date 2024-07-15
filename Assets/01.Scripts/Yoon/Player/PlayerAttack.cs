@@ -30,7 +30,7 @@ public class PlayerAttack : MonoBehaviour
     private ThrowInfo throwInfo;
 
     // 추후 get; private set;
-    public SkillData equipTreasureData; // 현재 장착 중인 보물 정보
+    public SkillData equipSkillData; // 현재 장착 중인 보물 정보
     private int throwCount;
     public int ThrowCount => throwCount;
 
@@ -58,12 +58,6 @@ public class PlayerAttack : MonoBehaviour
     {
         weaponController.OnWeaponStatChanged -= AcceptChangeWeaponStat;
         weaponController.OnTresureDataChanged -= AcceptChangeTreasureData;
-    }
-
-    private void Start()
-    {
-        //Scene_InGame _UI = UIManager_InGame.Instance.GetScene("Scene_InGame") as Scene_InGame;
-        //_UI.OnThrow(throwCount, equipTreasureData.CountForRecharge);
     }
 
     #region Aiming
@@ -125,13 +119,12 @@ public class PlayerAttack : MonoBehaviour
 
         // 무기 스킬 발동 가능한지 확인하고, 발사횟수를 조정해 줍니다.
         // 무기 스킬이 발동할 시점이라면 스킬 데이터를 할당해 줍니다.
-        if (throwCount >= equipTreasureData.CountForRecharge)
+        if (throwCount >= equipSkillData.CountForRecharge)
         {
             throwCount = 0;
-            skillData = equipTreasureData;
+            skillData = equipSkillData;
             skillData.CurrentWeaponId = equipWeaponStat.WeaponId;
             skillNotifyEffect.Stop();
-            Debug.Log("EffectStop");
         }
         else
         {
@@ -150,7 +143,7 @@ public class PlayerAttack : MonoBehaviour
         #region UI Update
 
         Scene_InGame _UI = UIManager_InGame.Instance.GetScene("Scene_InGame") as Scene_InGame;
-        _UI.OnThrow(throwCount, equipTreasureData.CountForRecharge);
+        _UI.OnThrow(throwCount, equipSkillData.CountForRecharge);
         if (equipWeaponStat.MaxThrowCount != 0)
         {
             _UI.OnUtillWeaponThrowed(equipWeaponStat.CurrentThrowCount, equipWeaponStat.MaxThrowCount);
@@ -170,9 +163,8 @@ public class PlayerAttack : MonoBehaviour
         PoolManager.Instance.Pop("ThrowSound");
 
         // 다음에 던졌을 때 스킬이 발동된다면 이펙트를 켜준다.
-        if (throwCount >= equipTreasureData.CountForRecharge)
+        if (throwCount >= equipSkillData.CountForRecharge)
         {
-            Debug.Log("Effect on");
             skillNotifyEffect.Play();
         }
     }
@@ -203,14 +195,14 @@ public class PlayerAttack : MonoBehaviour
     // 보물 장착
     private void AcceptChangeTreasureData(SkillData treasureData)
     {
-        if (equipTreasureData == treasureData)
+        if (equipSkillData == treasureData)
         {
             return;
         }
 
-        equipTreasureData = treasureData;
+        equipSkillData = treasureData;
 
         Scene_InGame _UI = UIManager_InGame.Instance.GetScene("Scene_InGame") as Scene_InGame;
-        _UI.OnThrow(throwCount, equipTreasureData.CountForRecharge);
+        _UI.OnThrow(throwCount, equipSkillData.CountForRecharge);
     }
 }

@@ -11,6 +11,8 @@ public class StageSO : ScriptableObject
     [SerializeField] private int m_maxLevel;
     public int MaxLevel => m_maxLevel;
 
+    [SerializeField] private int m_startLevelIndex;
+    public int StartLevelIndex => m_startLevelIndex;
 
     public List<string> GetSceneNames()
     {

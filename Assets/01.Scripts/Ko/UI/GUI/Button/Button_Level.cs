@@ -30,4 +30,14 @@ public class Button_Level : Button_Menu
 
         sceneManager.Instance.ChangeSceen(_SceneName, TransitionsEffect.circleWap);
     }
+
+    public void Lock()
+    {
+        if(transform.Find("Text_Level").TryGetComponent(out TextMeshProUGUI _text))
+        {
+            _text.color = Color.black;
+        }
+
+        Destroy(GetComponent<UI_EventHandler>());
+    }
 }

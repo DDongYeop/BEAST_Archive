@@ -18,4 +18,4 @@ MonoBehaviour:
   spritePivotPosition: {x: 0, y: 0}
   skillDescription: "\uBB34\uAE30\uC5D0 \uB9DE\uC558\uC744 \uB54C \uC801\uC774 \uC7A0\uC2DC
     \uB3D9\uC548 \uBA48\uCDA5\uB2C8\uB2E4."
-  IsActive: 1
+  IsActive: 0

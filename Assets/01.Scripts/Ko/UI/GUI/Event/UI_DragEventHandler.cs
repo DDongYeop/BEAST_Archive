@@ -7,19 +7,23 @@ using UnityEngine.UI;
 public class UI_DragEventHandler : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     [SerializeField] private ScrollRect m_ScrollRect;
+    public bool Enable = true;
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        m_ScrollRect.OnBeginDrag(eventData);
+        if(Enable)
+            m_ScrollRect.OnBeginDrag(eventData);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        m_ScrollRect.OnDrag(eventData);
+        if (Enable)
+            m_ScrollRect.OnDrag(eventData);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        m_ScrollRect.OnEndDrag(eventData);
+        if (Enable)
+            m_ScrollRect.OnEndDrag(eventData);
     }
 }
