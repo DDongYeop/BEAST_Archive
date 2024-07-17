@@ -6,11 +6,6 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.InputSystem;
 
-// 3. ¹«±â º¯°æ °¡´É
-// 4. ÄŞº¸ ½Ã½ºÅÛ
-// 5. Æ®·¦, È­¿°º´ °°Àº À¯Æ¿¸®Æ¼Çü ¹«±â È°¿ë¹ı
-// 6. ¾Æ±â°õÀ» Åä¹ú
-
 public class TutorialController : MonoBehaviour
 {
     private List<TutorialBase> tutorialList = new ();
@@ -67,7 +62,7 @@ public class TutorialController : MonoBehaviour
     {
         if (currentTutorialIndex == tutorialList.Count - 1)
         {
-            // ¸ğµç Æ©Åä¸®¾ó ³¡
+            // ëª¨ë“  íŠœí† ë¦¬ì–¼ ë
             Debug.Log("All Tutorial Done");
             return;    
         }
