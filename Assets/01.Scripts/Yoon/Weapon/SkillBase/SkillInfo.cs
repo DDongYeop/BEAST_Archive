@@ -22,6 +22,9 @@ public class SkillInfo : ScriptableObject
     [TextArea(1, 2)][SerializeField] private string skillDescription;
     public string SkillDescription => skillDescription;
 
+    [SerializeField] private int countForRecharge; // 스킬 카운트 충전을 위한 발사 횟수
+    public int CountForRecharge => countForRecharge;
+
     //풀린 스킬인지 아닌지
     public bool IsActive = false;
 }

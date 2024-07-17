@@ -24,13 +24,15 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] private float touchCoolTime = 0.75f;
     private float clickPassedTime;
     private float attackTime;
-    private bool isCanAttack => (clickPassedTime >= touchCoolTime);
-    public bool IsAttackInputIn { get; private set; }
-    
-    // private Touch tempTouch;
+    public bool IsCanAttack => (clickPassedTime >= touchCoolTime);
+    public bool IsThrowReady { get; set; }
+
+    public bool IsActivate { get; set; } = true;
 
     private void Update()
     {
+        if (false == IsActivate) return;
+
         // 공격 경과 시간
         clickPassedTime = Time.time - attackTime;
 
@@ -50,6 +52,8 @@ public class PlayerInput : MonoBehaviour
         }
     }
 
+    #region PC INPUT
+
     private void MoveInput()
     {
         xInput = Input.GetAxis("Horizontal");
@@ -62,40 +66,21 @@ public class PlayerInput : MonoBehaviour
         {
             if (false == IsTouchPlayer()) return;
 
-            IsAttackInputIn = false;
+            IsThrowReady = false;
             AimingkEvent?.Invoke();
         }
 
         // 떼었을 때
         if (Input.GetMouseButtonUp(1))
         {
-            IsAttackInputIn = true;
+            IsThrowReady = true;
             attackTime = Time.time;
         }
-
-// #if PLATFORM_ANDROID
-// 
-//         if (Input.touchCount > 0)
-//         {
-//             tempTouch = Input.GetTouch(0);
-// 
-//             if (tempTouch.phase == TouchPhase.Began)
-//             {
-//                 // 플레이어 쪽을 시작 지점으로 잡았는지 확인
-//                 if (false == IsTouchPlayer()) return;
-// 
-//                 IsAttackInputIn = false;
-//                 AimingkEvent?.Invoke();
-//             }
-//             if (tempTouch.phase == TouchPhase.Ended)
-//             {
-//                 IsAttackInputIn = true;
-//                 attackTime = Time.time;
-//             }
-//         }
-// 
-// #endif
     }
+
+    #endregion
+
+    #region MOBILE INPUT
 
     private void TouchInput()
     {
@@ -120,14 +105,14 @@ public class PlayerInput : MonoBehaviour
         }
     }
 
-    private void HandleTouchBegan()
+    public void HandleTouchBegan()
     {
         // 플레이어 쪽을 시작 지점으로 잡았는지 확인합니다.
         if (IsTouchPlayer())
         {
-            if (isCanAttack)
+            if (IsCanAttack)
             {
-                IsAttackInputIn = false;
+                IsThrowReady = true;
                 AimingkEvent?.Invoke();
             }
         }
@@ -137,15 +122,17 @@ public class PlayerInput : MonoBehaviour
         }
     }
 
-    private void HandleTouchEnded()
+    public void HandleTouchEnded()
     {
-        if (false == IsAttackInputIn)
+        if (IsThrowReady)
         {
-            IsAttackInputIn = true;
+            IsThrowReady = false;
             attackTime = Time.time;
         }
         xInput = 0;
     }
+
+    #endregion
 
     private bool IsTouchPlayer()
     {

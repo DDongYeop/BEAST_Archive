@@ -4,6 +4,7 @@ public class PlayerIdleState : PlayerState
 
     public override void Enter()
     {
+        // playerController.StopImmediately();
         PlayAnimation(animBoolHash);
     }
 

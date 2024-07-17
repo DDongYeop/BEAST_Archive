@@ -64,7 +64,7 @@ public class Scene_TreasureSelect : UI_Scene, IDataObserver
 
         _contentPanel.localPosition = Vector3.zero;
         _curShowWeaponIndex = Mathf.RoundToInt(0 - _contentPanel.localPosition.x / (_slotSize.x + _horGroup.spacing));
-        Get<TextMeshProUGUI>("Text_WeaponInfo").text = $"{_SkillData[_curShowWeaponIndex].SkillName}\n\n<size=20>{_SkillData[_curShowWeaponIndex].SkillDescription}</size>";
+        Get<TextMeshProUGUI>("Text_WeaponInfo").text = $"{_SkillData[_curShowWeaponIndex].SkillName}\n\n<size=20>{_SkillData[_curShowWeaponIndex].SkillDescription}</size>\n<size=20>{_SkillData[_curShowWeaponIndex].CountForRecharge}</size>";
 
 
         foreach (Transform _child in _contentPanel.transform)
@@ -211,7 +211,8 @@ public class Scene_TreasureSelect : UI_Scene, IDataObserver
             _curShowWeaponIndex = Mathf.RoundToInt(0 - _contentPanel.localPosition.x / (_slotSize.x + _horGroup.spacing));
             _curShowWeaponIndex = Mathf.Clamp(_curShowWeaponIndex, 0, _SkillData.Length - 1);
 
-            Get<TextMeshProUGUI>("Text_WeaponInfo").text = $"{_SkillData[_curShowWeaponIndex].SkillName}\n\n<size=20>{_SkillData[_curShowWeaponIndex].SkillDescription}</size>";
+            Get<TextMeshProUGUI>("Text_WeaponInfo").text = $"{_SkillData[_curShowWeaponIndex].SkillName}\n\n<size=20>{_SkillData[_curShowWeaponIndex].SkillDescription}</size>\n<size=20>{_SkillData[_curShowWeaponIndex].CountForRecharge}</size>";
+
 
             foreach (Transform _child in _contentPanel.transform)
             {

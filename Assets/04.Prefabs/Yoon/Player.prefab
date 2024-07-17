@@ -3965,6 +3965,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEditor: 0
+  isActivate: 0
   touchCoolTime: 0.5
 --- !u!114 &781976941563168938
 MonoBehaviour:

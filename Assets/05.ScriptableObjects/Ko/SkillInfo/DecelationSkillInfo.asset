@@ -17,4 +17,5 @@ MonoBehaviour:
   skillSprite: {fileID: 1711856142, guid: 1571baf9fdcb5ad42b10ad63de6e05ae, type: 3}
   spritePivotPosition: {x: 0, y: 0}
   skillDescription: "\uBB34\uAE30\uC5D0 \uB9DE\uC558\uC744 \uB54C \uC801\uC774 \uAC10\uC18D\uD569\uB2C8\uB2E4."
+  countForRecharge: 7
   IsActive: 0

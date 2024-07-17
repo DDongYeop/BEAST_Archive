@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.InputSystem;
 
 // 3. 무기 변경 가능
 // 4. 콤보 시스템
@@ -14,8 +15,10 @@ public class TutorialController : MonoBehaviour
 {
     private List<TutorialBase> tutorialList = new ();
 
-    private int currentTutorialIndex = 0;
-    private readonly int endTutorialIndex = 7;
+    [SerializeField] private int currentTutorialIndex = 0;
+    // private readonly int endTutorialIndex = 7;
+
+    public PlayerController PlayerController { get; private set; }    
 
     #region UI
 
@@ -29,13 +32,18 @@ public class TutorialController : MonoBehaviour
 
     #endregion
 
-    private void Awake()
+    private void OnEnable()
     {
+        PlayerController = FindObjectOfType<PlayerController>();
+
         var tutorialBases = transform.Find("TutorialContainer").GetComponentsInChildren<TutorialBase>();
         tutorialList = tutorialBases.ToList();
 
         imageCanvasGroup.alpha = 0f;
+    }
 
+    private void Start()
+    {
         foreach (var tutorial in tutorialList)
         {
             if (tutorial != null)
@@ -43,16 +51,14 @@ public class TutorialController : MonoBehaviour
                 tutorial.SetUIProperty(this);
             }
         }
-    }
 
-    private void Start()
-    {
+        PlayerController.PlayerInput.IsActivate = false;
         TutorialRunner().Forget();
     }
 
     private async UniTaskVoid TutorialRunner()
     {
-        await UniTask.Delay(1000);
+        await UniTask.Delay(500);
         await tutorialList[currentTutorialIndex].ProcessTutorial();
         ToNextTutorial();
     }

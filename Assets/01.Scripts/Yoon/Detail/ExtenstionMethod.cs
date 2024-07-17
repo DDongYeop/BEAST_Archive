@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -33,5 +34,11 @@ public static class ExtenstionMethod
     public static async UniTask WaitForTouchInput(this TutorialBase tutorialBase)
     {
         await UniTask.WaitUntil(() => Input.touchCount > 0);
+    }
+
+    public static async UniTaskVoid DelayAfterAction(this MonoBehaviour tutorialBase, float delayDuration, Action action)
+    {
+        await UniTask.WaitForSeconds(delayDuration);
+        action();
     }
 }

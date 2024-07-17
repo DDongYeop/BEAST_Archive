@@ -26,6 +26,11 @@ public class sceneManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    private void Update()
+    {
+        Debug.Log(SceneManager.GetActiveScene().name);
+    }
+
     //public void ChangeNextSceen(TransitionsEffect transitionsEffect = TransitionsEffect.none) => StartCoroutine(SceneChangeTransitions(SceneManager.GetActiveScene().buildIndex + 1, transitionsEffect));
 
     //public void ChangeNextSceenAndTransitionsEffect(string num) => StartCoroutine(SceneChangeTransitions(SceneManager.GetActiveScene().buildIndex + 1, (TransitionsEffect)num));
@@ -36,6 +41,7 @@ public class sceneManager : MonoBehaviour
 
     IEnumerator SceneChangeTransitions(string name, TransitionsEffect transitionsEffect)
     {
+   
         OnSceneChanged.Invoke(name);
 
         if ((int)transitionsEffect == -1)
@@ -48,11 +54,16 @@ public class sceneManager : MonoBehaviour
         chidObj.gameObject.SetActive(true);
         Animator ani = chidObj.GetComponent<Animator>();
 
+        if (ani.GetCurrentAnimatorStateInfo(0).fullPathHash != Animator.StringToHash("Idle"))
+        {
+            yield return null;
+        }
+
         ani.SetTrigger("Start");
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(name);
         //ani.SetTrigger("End");
         yield return new WaitForSeconds(1f);
-        chidObj.gameObject.SetActive(false);
+        //chidObj.gameObject.SetActive(false);
     }
 }

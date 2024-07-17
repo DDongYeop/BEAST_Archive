@@ -1,9 +1,12 @@
 using FSM;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TutoHealth : AgentHealth
 {
     private FSMRunner _fsmRunner;
+
+    public UnityEvent OnDamageEvent;
 
     protected override void Awake()
     {
@@ -18,5 +21,7 @@ public class TutoHealth : AgentHealth
         
         if (_fsmRunner.GetCurrentAction().IsAttackStop)
             _fsmRunner.ChangeState(FSMState.Idle);
+
+        OnDamageEvent?.Invoke();
     }
 }

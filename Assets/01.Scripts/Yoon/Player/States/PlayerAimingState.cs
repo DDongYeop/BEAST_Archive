@@ -27,7 +27,7 @@ public class PlayerAimingState : PlayerState
         }
 
         // 옳은 조준 상태이고, 발사 입력이 들어왔다면 Throw로
-        if (playerInput.IsAttackInputIn)
+        if (false == playerInput.IsThrowReady)
         {
             stateMachine.ChangeState(PlayerStateEnum.Throw);
         }

@@ -99,23 +99,24 @@ public class PlayerController : MonoBehaviour
 
     #region Movement
 
-        public void SetVelocity(float x)
-        {
-            playerMovement.SetVelocity(x);
-        }
+    public void SetVelocity(float x)
+    {
+        playerMovement.SetVelocity(x);
+    }
 
-        public void ControllGroundEffect(bool isOn)
-        {
-            groundEffect.SetActive(isOn);
-        }
-        
-        // ¡ÔΩ√ ∏ÿ√„
-        // public void StopImmediately(bool withYAxis = true)
-        // {
-        //     playerMovement.StopImmediately(withYAxis);
-        // }
+    public void ControllGroundEffect(bool isOn)
+    {
+        groundEffect.SetActive(isOn);
+    }
 
-        #endregion
+    // ¡ÔΩ√ ∏ÿ√„
+    public void StopImmediately(bool withYAxis = true)
+    {
+        SetVelocity(0);
+        StateMachine.ChangeState(PlayerStateEnum.Idle);
+    }
+
+    #endregion
 
     #region ETC
 

@@ -19,7 +19,7 @@ public class PlayerBowAmingState : PlayerAimingState
         }
 
         // 옳은 조준 상태라면 BowThrow로
-        if (playerInput.IsAttackInputIn)
+        if (false == playerInput.IsThrowReady)
         {
             stateMachine.ChangeState(PlayerStateEnum.BowThrow);
         }

@@ -19,13 +19,13 @@ public class PlayerMovement : MonoBehaviour
     // ¡ÔΩ√ ∏ÿ√„
     public void StopImmediately(bool withYAxis = true)
     {
-        // if (withYAxis)
-        // {
-        //     rigidbody.velocity = Vector2.zero;
-        // }
-        // else
-        // {
-        //     rigidbody.velocity = new Vector2(0, rigidbody.velocity.y);
-        // }
+        if (withYAxis)
+        {
+            rigidbody.velocity = Vector2.zero;
+        }
+        else
+        {
+            rigidbody.velocity = new Vector2(0, rigidbody.velocity.y);
+        }
     }
 }
