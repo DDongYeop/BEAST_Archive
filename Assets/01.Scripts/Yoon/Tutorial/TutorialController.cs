@@ -10,8 +10,7 @@ public class TutorialController : MonoBehaviour
 {
     private List<TutorialBase> tutorialList = new ();
 
-    [SerializeField] private int currentTutorialIndex = 0;
-    // private readonly int endTutorialIndex = 7;
+    private int currentTutorialIndex = 0;
 
     public PlayerController PlayerController { get; private set; }    
 
