@@ -6,11 +6,17 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.InputSystem;
 
+// 3. ¹«±â º¯°æ °¡´É
+// 4. ÄŞº¸ ½Ã½ºÅÛ
+// 5. Æ®·¦, È­¿°º´ °°Àº À¯Æ¿¸®Æ¼Çü ¹«±â È°¿ë¹ı
+// 6. ¾Æ±â°õÀ» Åä¹ú
+
 public class TutorialController : MonoBehaviour
 {
     private List<TutorialBase> tutorialList = new ();
 
-    private int currentTutorialIndex = 0;
+    [SerializeField] private int currentTutorialIndex = 0;
+    // private readonly int endTutorialIndex = 7;
 
     public PlayerController PlayerController { get; private set; }    
 
@@ -61,8 +67,9 @@ public class TutorialController : MonoBehaviour
     {
         if (currentTutorialIndex == tutorialList.Count - 1)
         {
-            // ëª¨ë“  íŠœí† ë¦¬ì–¼ ë
+            // ¸ğµç Æ©Åä¸®¾ó ³¡
             Debug.Log("All Tutorial Done");
+            sceneManager.Instance.ChangeSceen("Menu 2");
             return;    
         }
 

@@ -29,4 +29,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/00.Scenes/Kyung/Spider/3.Spider.unity
     guid: d783c6c83edf65c4ba76570d8328e9e7
+  - enabled: 1
+    path: Assets/00.Scenes/Kyung/Tortoise/1.Tortoise.unity
+    guid: 2834741b8f4574048bed13b8c8a275ac
+  - enabled: 1
+    path: Assets/00.Scenes/Kyung/Tortoise/2.Tortoise.unity
+    guid: 1e172dae21b40ec44b9754889d3980b3
+  - enabled: 1
+    path: Assets/00.Scenes/Kyung/Tortoise/3.Tortoise.unity
+    guid: 71a6e2300f58507459558c409e4e63e2
+  - enabled: 1
+    path: Assets/00.Scenes/Yoon/Tutorial.unity
+    guid: d3131f2a95b85934e8936697f38b6e5e
   m_configObjects: {}

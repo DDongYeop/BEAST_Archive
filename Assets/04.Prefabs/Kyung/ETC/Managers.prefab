@@ -73,8 +73,7 @@ MonoBehaviour:
     stages: []
     weaponInfoList: []
     skillInfoList: []
-    level:
-      Levels: 00000000000000000000
+    levels: []
     SkillInfo: {fileID: 0}
 --- !u!114 &6585832598140581416
 MonoBehaviour:
@@ -88,4 +87,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fb6f16aae33fc2488ed4c639243a369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentLevelValue: 0
+  _currentLevelValue: 1

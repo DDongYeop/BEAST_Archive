@@ -16,7 +16,7 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     public void GameClear()
     {
-        if (!SaveLoadManager.Instance.data.level.Levels[_currentLevelValue])
+        if (!SaveLoadManager.Instance.data.levels[_currentLevelValue].Clear)
         {
             //첫 클리어
             List<int> notActiveIndex = new List<int>();
@@ -37,6 +37,7 @@ public class LevelManager : MonoSingleton<LevelManager>
             }
         }
 
-        SaveLoadManager.Instance.data.level.Levels[_currentLevelValue] = true;
+        SaveLoadManager.Instance.data.levels[_currentLevelValue].Clear = true;
+        SaveLoadManager.Instance.SaveData();
     }
 }

@@ -458,6 +458,71 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2028266909}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &867332066
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 867332068}
+  - component: {fileID: 867332067}
+  m_Layer: 0
+  m_Name: Save
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &867332067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 867332066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49e3f00b6a894ea45ac0a56aa51a852a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultWeaponInfos:
+  - {fileID: 11400000, guid: 303a04bc3e36e694ba3f3be1a45e6d7e, type: 2}
+  - {fileID: 11400000, guid: e135dafb77cb11b4ba15656a5acb0bc4, type: 2}
+  - {fileID: 11400000, guid: 5586ce4b504257d4a90bac1b6b3e9b6a, type: 2}
+  defaultStages: []
+  defaultLevel: {fileID: 11400000, guid: ce03cd30ee55507469e503d4d5e11a3f, type: 2}
+  defaultSkillInfo: {fileID: 11400000, guid: 6a4ffc39cedc0e54583937af8d0e0dca, type: 2}
+  data:
+    stages:
+    - {fileID: 11400000, guid: a1c82691526ccfd48a5904208b62af87, type: 2}
+    - {fileID: 11400000, guid: 3b19ceeae4189a74fb230a59714982ea, type: 2}
+    weaponInfoList: []
+    skillInfoList:
+    - {fileID: 11400000, guid: 6a4ffc39cedc0e54583937af8d0e0dca, type: 2}
+    - {fileID: 11400000, guid: b43970dfb393cbf4da59480e84324955, type: 2}
+    - {fileID: 11400000, guid: 0f1574c5399ede646ac0ac906bb4b0c9, type: 2}
+    - {fileID: 11400000, guid: de33f725cd82f66468694d75e1ae000c, type: 2}
+    - {fileID: 11400000, guid: d1674483f1393114caf6107aaf4b00ae, type: 2}
+    - {fileID: 11400000, guid: 20bdfe54e3fc1b04e8f20308071f1f4d, type: 2}
+    levels: []
+    SkillInfo: {fileID: 0}
+--- !u!4 &867332068
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 867332066}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 810.00195, y: 562.95, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1010428104
 GameObject:
   m_ObjectHideFlags: 0
@@ -1768,3 +1833,4 @@ SceneRoots:
   - {fileID: 1729765828}
   - {fileID: 129706862}
   - {fileID: 2028266909}
+  - {fileID: 867332068}

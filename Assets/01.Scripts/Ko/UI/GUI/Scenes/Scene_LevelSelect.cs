@@ -52,7 +52,6 @@ public class Scene_LevelSelect : UI_Scene, IDataObserver
             UIManager_Menu.Instance.HideScene("Image_Stages"); 
             UIManager_Menu.Instance.ShowScene("Panel_Menu"); 
         });
-        //BindSlot();
     }
 
     public void BindSlot(StageSO _data)
@@ -78,7 +77,7 @@ public class Scene_LevelSelect : UI_Scene, IDataObserver
             {
                 _button.InitScene(_sceneNames[i]);
 
-                if (!_saveData.level.Levels[_data.StartLevelIndex - 1 + i])
+                if (!_saveData.levels[_data.StartLevelIndex - 1 + i].Clear)
                 {
                     _button.Lock();
                 }

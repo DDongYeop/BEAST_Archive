@@ -83,7 +83,7 @@ MonoBehaviour:
   _shakePower: 0
   _shakeTime: 0
   IsAttackStop: 0
-  _speed: 3
+  _speed: 2.5
   _addDash: 0
   _addPos: {x: 0, y: 0, z: 0}
 --- !u!114 &-3921307224072296537
@@ -228,7 +228,7 @@ MonoBehaviour:
   _shakePower: 2
   _shakeTime: 2
   IsAttackStop: 1
-  _speed: 4.5
+  _speed: 4
   _addDash: 1
   _addPos: {x: -2.06, y: 5.5, z: 0}
 --- !u!114 &5409975921185164101
@@ -253,7 +253,7 @@ MonoBehaviour:
   Brain: {fileID: 0}
   Description: IsAttack03
   _condition: 3
-  _benchmark: 10
+  _benchmark: 8
   _isDown: 1
   _coolTime: 4
   _animationKey: IsAttack03
@@ -313,7 +313,7 @@ MonoBehaviour:
   Brain: {fileID: 0}
   Description: IsAttack02
   _condition: 3
-  _benchmark: 10
+  _benchmark: 8
   _isDown: 1
   _coolTime: 6
   _animationKey: IsAttack02
@@ -345,7 +345,7 @@ MonoBehaviour:
   _condition: 3
   _benchmark: 15
   _isDown: 1
-  _coolTime: 15
+  _coolTime: 13
   _animationKey: IsAttack01
   _isShake: 1
   _shakePower: 0

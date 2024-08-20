@@ -84,7 +84,7 @@ MonoBehaviour:
   _shakePower: 0
   _shakeTime: 0
   IsAttackStop: 0
-  _speed: 3.1
+  _speed: 2.6
   _addDash: 0
   _addPos: {x: 0, y: 0, z: 0}
 --- !u!114 &-3921307224072296537
@@ -260,7 +260,7 @@ MonoBehaviour:
   _shakePower: 2
   _shakeTime: 2
   IsAttackStop: 1
-  _speed: 5.5
+  _speed: 4
   _addDash: 1
   _addPos: {x: -2.76, y: 5.31, z: 0}
 --- !u!114 &5409975921185164101
@@ -287,7 +287,7 @@ MonoBehaviour:
   _condition: 3
   _benchmark: 12
   _isDown: 1
-  _coolTime: 3.5
+  _coolTime: 3
   _animationKey: IsAttack03
   _isShake: 0
   _shakePower: 0
@@ -347,7 +347,7 @@ MonoBehaviour:
   _condition: 3
   _benchmark: 12
   _isDown: 1
-  _coolTime: 5.5
+  _coolTime: 5
   _animationKey: IsAttack02
   _isShake: 0
   _shakePower: 0
@@ -377,7 +377,7 @@ MonoBehaviour:
   _condition: 3
   _benchmark: 13
   _isDown: 1
-  _coolTime: 12.5
+  _coolTime: 8
   _animationKey: IsAttack01
   _isShake: 1
   _shakePower: 0

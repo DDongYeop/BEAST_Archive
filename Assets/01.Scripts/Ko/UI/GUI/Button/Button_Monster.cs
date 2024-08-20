@@ -24,15 +24,34 @@ public class Button_Monster : Button_Menu, IDataObserver
     {
         base.OnEnable();
         
-        if(_stageData.StartLevelIndex == 1)
-        {
-            UnLock();
-        }
-        else
-        {
-            GetComponent<UI_EventHandler>().Enable = false;
+        //if(_stageData.StartLevelIndex == 1)
+        //{
+        //    UnLock();
+        //    GetComponent<UI_EventHandler>().Enable = true;
+        //}
+        //else
+        //{
+        //    GetComponent<UI_EventHandler>().Enable = false;
 
-        }
+        //}
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+
+        //if (_data.levels[_stageData.StartLevelIndex - 1].Clear)
+        //{
+        //    //_enable = true;
+        //    GetComponent<UI_EventHandler>().Enable = true;
+
+        //    UnLock();
+        //}
+        //else
+        //{
+        //    GetComponent<UI_EventHandler>().Enable = false;
+        //    //Invoke("DestroyComponent", 0.2f);
+        //}
     }
 
     public void ReadData(SaveData data)
@@ -42,9 +61,10 @@ public class Button_Monster : Button_Menu, IDataObserver
 
         _data = data;
 
-        if (_data.level.Levels[_stageData.StartLevelIndex - 1])
+        if (_data.levels[_stageData.StartLevelIndex - 1].Clear)
         {
             //_enable = true;
+            GetComponent<UI_EventHandler>().Enable = true;
 
             UnLock();
         }

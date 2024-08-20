@@ -51,54 +51,12 @@ public class Scene_Menu : UI_Scene
 
         _scrollRect.onValueChanged.AddListener(OnScrollMove);
         
-        //_scrollRect.OnInitializePotentialDrag
 
         BindEvent(Get<ScrollRect>("ScrollRect_Levels").gameObject, (PointerEventData _data, Transform _transform) => { _isMouseDown = true; }, Define.ClickType.Down);
-        //BindEvent(Get<ScrollRect>("ScrollRect_Levels").gameObject, (PointerEventData _data, Transform _transform) => { _isMouseDown = true; }, Define.ClickType.Move);
         BindEvent(Get<ScrollRect>("ScrollRect_Levels").gameObject, (PointerEventData _data, Transform _transform) => { _isMouseDown = false; }, Define.ClickType.Up);
-        //BindEvent(_scrollRect.gameObject, (PointerEventData _data, Transform _transform) => { _isMouseDown = true; }, Define.ClickType.OnDrag);
-        //BindEvent(_scrollRect.gameObject, (PointerEventData _data, Transform _transform) => { _isMouseDown = false; }, Define.ClickType.EndDrag);
-        //BindSlot();
+
 
         _btnSelect = true;
-    }
-
-    protected override void Update()
-    {
-        //base.Update();
-
-        //Debug.Log(_isMouseDown);
-
-        //_curIndex = Mathf.RoundToInt(0 - _contentPanel.localPosition.x / (_slotSize.x + _horGroup.spacing));
-
-        //if (_scrollRect.velocity.magnitude < 200 && !_isSnapped && !_isMouseDown)
-        //{
-        //    _scrollRect.velocity = Vector2.zero;
-        //    _snapSpeed += _snapForce * Time.deltaTime;
-
-        //    _contentPanel.localPosition = new Vector3(
-        //        Mathf.MoveTowards(_contentPanel.localPosition.x, 0 - (_curIndex * (_slotSize.x + _horGroup.spacing)), _snapSpeed),
-        //        _contentPanel.localPosition.y,
-        //        _contentPanel.localPosition.z);
-
-
-        //    if (_contentPanel.localPosition.x == 0 - (_curIndex * (_slotSize.x + _horGroup.spacing)))
-        //    {
-        //        _isSnapped = true;
-        //    }
-        //}
-
-        //if (_scrollRect.velocity.magnitude > 200)
-        //{
-        //    _isSnapped = false;
-        //    _snapSpeed = 0;
-        //}
-    }
-
-
-    protected override void Start()
-    {
-        base.Start();
     }
 
     protected override void OnEnable()
@@ -117,36 +75,12 @@ public class Scene_Menu : UI_Scene
 
         foreach(Button_Menu _button in _button_Menus)
         {
+            Debug.Log("debugTest");
+           
             BindEvent(_button.gameObject, OnButtonSelected, Define.ClickType.Click);
             _button.ShowUI();
         }
     }
-
-    //private void BindSlot()
-    //{
-    //    DestroySlot();
-
-    //    foreach(Levels _level in _levels)
-    //    {
-    //        GameObject _newSlot = Instantiate(_slotObj.gameObject, _contentPanel.transform);
-
-    //        Transform _fill = _newSlot.transform.Find("Image_Fill");
-    //        _fill.transform.Find("Text_Name").GetComponent<TextMeshProUGUI>().text = _level.Name;
-    //        _fill.transform.Find("Image_Mask").GetChild(0).GetComponent<Image>().sprite = _level.Sprite;
-
-    //        _newSlot.name = "Image_" + _level.Name;
-    //        BindEvent(_newSlot, (PointerEventData _data, Transform _transform) => { SceneManager.LoadScene(_level.SceneName); });
-    //    }
-    //}
-
-    //private void OnSceneSelected(PointerEventData _data, Transform _transform)
-    //{
-    //    string _levelName = _transform.name.Split('_')[1];
-
-    //    var _level = _levels.Where(i => i.Name == _levelName);
-
-    //    //SceneManager.LoadScene(_levelName);
-    //}
 
     private void OnButtonSelected(PointerEventData _data, Transform _transform)
     {

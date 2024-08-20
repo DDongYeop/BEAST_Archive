@@ -85,7 +85,7 @@ MonoBehaviour:
   _shakePower: 0
   _shakeTime: 0
   IsAttackStop: 0
-  _speed: 3.3
+  _speed: 2.3
   _addDash: 0
   _addPos: {x: 0, y: 0, z: 0}
 --- !u!114 &-3921307224072296537
@@ -103,7 +103,7 @@ MonoBehaviour:
   State: 0
   Started: 0
   Guid: 30e80296c2caea246baaa1880244a3b2
-  Position: {x: 229, y: 275}
+  Position: {x: 237, y: 283}
   Blackboard:
     MoveToPosition: {x: 0, y: 0, z: 0}
     MoveToObject: {fileID: 0}
@@ -163,9 +163,9 @@ MonoBehaviour:
   Brain: {fileID: 0}
   Description: IsAttack06
   _condition: 3
-  _benchmark: 14
+  _benchmark: 18
   _isDown: 0
-  _coolTime: 8
+  _coolTime: 10
   _animationKey: IsAttack06
   _isShake: 0
   _shakePower: 2
@@ -254,9 +254,9 @@ MonoBehaviour:
   Brain: {fileID: 0}
   Description: IsAttack04
   _condition: 3
-  _benchmark: 12
-  _isDown: 1
-  _coolTime: 7
+  _benchmark: 10
+  _isDown: 0
+  _coolTime: 6
   _animationKey: IsAttack04
   _isShake: 0
   _shakePower: 0
@@ -292,7 +292,7 @@ MonoBehaviour:
   _shakePower: 2
   _shakeTime: 2
   IsAttackStop: 1
-  _speed: 4
+  _speed: 4.25
   _addDash: 1
   _addPos: {x: -2.97, y: 5.66, z: 0}
 --- !u!114 &5409975921185164101
@@ -319,7 +319,7 @@ MonoBehaviour:
   _condition: 0
   _benchmark: 17.5
   _isDown: 1
-  _coolTime: 4
+  _coolTime: 6
   _animationKey: IsAttack05
   _isShake: 0
   _shakePower: 0
@@ -379,7 +379,7 @@ MonoBehaviour:
   _condition: 0
   _benchmark: 12
   _isDown: 0
-  _coolTime: 3
+  _coolTime: 2
   _animationKey: IsAttack02
   _isShake: 0
   _shakePower: 0
@@ -409,7 +409,7 @@ MonoBehaviour:
   _condition: 0
   _benchmark: 15
   _isDown: 1
-  _coolTime: 7.5
+  _coolTime: 2
   _animationKey: IsAttack01
   _isShake: 1
   _shakePower: 0

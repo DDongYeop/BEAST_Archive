@@ -1,18 +1,13 @@
 using System;
 
 [Serializable]
-public class Level : IDataObserver
+public class Level 
 {
-    public bool[] Levels = new bool[10]
-        { true, false, false, false, false, false, false, false, false, false }; 
-    
-    public void WriteData(ref SaveData data)
-    {
-        data.level.Levels = Levels;
-    }
+    public int Count = 0;
+    public bool Clear;
 
-    public void ReadData(SaveData data)
+    public Level(int cnt)
     {
-        Levels = data.level.Levels;
+        Count = cnt;
     }
 }

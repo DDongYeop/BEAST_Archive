@@ -28,6 +28,13 @@ public class Scene_Start : UI_Base
     {
         GameObject.Find("01.Bear").GetComponent<Animator>().SetBool("IsAttack01", true);
         yield return new WaitForSeconds(0.6f);
-        sceneManager.Instance.ChangeSceen("Menu 2", TransitionsEffect.fade);
+        if (SaveLoadManager.Instance.data.levels[0].Clear)
+            sceneManager.Instance.ChangeSceen("Menu 2", TransitionsEffect.fade);
+        else
+        {
+            SaveLoadManager.Instance.data.levels[0].Clear = true;
+            SaveLoadManager.Instance.SaveData();
+            sceneManager.Instance.ChangeSceen("Tutorial", TransitionsEffect.fade);
+        }
     }
 }
