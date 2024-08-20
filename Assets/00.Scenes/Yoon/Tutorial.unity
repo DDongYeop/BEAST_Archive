@@ -240,6 +240,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2631637091425878770, guid: 93ecaf3ebde028043a0628cf9aa94042, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 18.599998
+      objectReference: {fileID: 0}
     - target: {fileID: 3339086488590713262, guid: 93ecaf3ebde028043a0628cf9aa94042, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -400,6 +404,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7229682794479324336, guid: 93ecaf3ebde028043a0628cf9aa94042, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1765814743}
     - target: {fileID: 9016089182164262196, guid: 93ecaf3ebde028043a0628cf9aa94042, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -717,6 +725,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17c10fdf4ca0075419ba3df10a9c1990, type: 3}
+--- !u!20 &1765814743 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 1340219249254365023, guid: 17c10fdf4ca0075419ba3df10a9c1990, type: 3}
+  m_PrefabInstance: {fileID: 1765814742}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1878296368
 GameObject:
   m_ObjectHideFlags: 0
@@ -1273,6 +1286,26 @@ PrefabInstance:
     - target: {fileID: 1335836845721764423, guid: 1ba3e0fd567232642a3bedc8b7f79500, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1542027692669918985, guid: 1ba3e0fd567232642a3bedc8b7f79500, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1765814743}
+    - target: {fileID: 1542027692669918985, guid: 1ba3e0fd567232642a3bedc8b7f79500, type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1542027692669918985, guid: 1ba3e0fd567232642a3bedc8b7f79500, type: 3}
+      propertyPath: m_SortingOrder
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1542027692669918985, guid: 1ba3e0fd567232642a3bedc8b7f79500, type: 3}
+      propertyPath: m_PlaneDistance
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1542027692669918985, guid: 1ba3e0fd567232642a3bedc8b7f79500, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 917187625
       objectReference: {fileID: 0}
     - target: {fileID: 2686051346917458034, guid: 1ba3e0fd567232642a3bedc8b7f79500, type: 3}
       propertyPath: m_text
